@@ -354,6 +354,7 @@ p {
   line-height: 1.1;
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 .text-accent {
@@ -367,6 +368,7 @@ p {
   margin-bottom: var(--spacing-lg);
   margin-left: auto;
   margin-right: auto;
+  text-align: center;
 }
 
 .hero-actions {
