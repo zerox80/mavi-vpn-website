@@ -14,7 +14,7 @@ export default function Architecture() {
                             Most residential connections (DS-Lite, PPPoE) suffer from maximum transmission unit (MTU) limitations. Standard VPNs relying on 1500-byte packets inevitably cause fragmentation. Modern firewalls abhor fragments, silently dropping them into "Black Holes".
                         </p>
                         <p className="architecture-description">
-                            By enforcing a mathematically precise dual-layer MTU system—a 1280 Byte inner payload wrapped strictly in a 1360 Byte outer tunnel—Mavi VPN bypasses Path MTU Discovery failures completely. This absolute limit guarantees zero fragmentation while leaving 38 bytes for the QUIC/UDP/TLS overhead.
+                            By enforcing a mathematically precise dual-layer MTU system - a 1280 Byte inner payload wrapped strictly in a 1360 Byte outer tunnel - Mavi VPN bypasses Path MTU Discovery failures completely. This absolute limit guarantees zero fragmentation while leaving 38 bytes for the QUIC/UDP/TLS overhead.
                         </p>
 
                         <div className="arch-stats">
