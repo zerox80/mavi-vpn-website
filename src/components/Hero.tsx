@@ -1,4 +1,4 @@
-﻿
+﻿import { Link } from 'react-router-dom';
 import { ShieldAlert, Zap, Lock } from 'lucide-react';
 
 export default function Hero() {
@@ -25,12 +25,12 @@ export default function Hero() {
                     </p>
 
                     <div className="hero-actions">
-                        <a href="#download" className="btn-primary">
+                        <Link to="/#download" className="btn-primary">
                             Download Client
-                        </a>
-                        <a href="#architecture" className="btn-secondary">
+                        </Link>
+                        <Link to="/technology" className="btn-secondary">
                             Read Architecture
-                        </a>
+                        </Link>
                     </div>
 
                     <div className="hero-features">
