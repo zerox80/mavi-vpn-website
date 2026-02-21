@@ -10,7 +10,7 @@ const features = [
     {
         icon: <Globe2 className="text-accent" size={32} strokeWidth={1.5} />,
         title: 'The "Pinned MTU" Strategy',
-        description: 'Solves the infamous "Packet Too Big" black holes on constrained DSL/PPPoE lines. We enforce a strict 1280 Byte inner payload and 1360 Byte outer tunnel, guaranteeing zero fragmentation.',
+        description: 'Solves the infamous "Packet Too Big" black holes on constrained DSL/PPPoE lines. We enforce a strict 1280 Byte inner payload (your raw packets) and a 1360 Byte outer tunnel (including 80 Bytes overhead), guaranteeing zero fragmentation.',
     },
     {
         icon: <Cpu className="text-accent" size={32} strokeWidth={1.5} />,

@@ -16,7 +16,7 @@ export default function Footer() {
                             <h4 className="link-title">Product</h4>
                             <Link to="/" className="footer-link">Home</Link>
                             <Link to="/technology" className="footer-link">Technology</Link>
-                            <a href="/#download" className="footer-link">Download</a>
+                            <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="footer-link">GitHub Repo</a>
                         </div>
                         <div className="link-group">
                             <h4 className="link-title">Legal</h4>

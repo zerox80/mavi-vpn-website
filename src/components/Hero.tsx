@@ -25,9 +25,9 @@ export default function Hero() {
                     </p>
 
                     <div className="hero-actions">
-                        <Link to="/#download" className="btn-primary">
-                            Download Client
-                        </Link>
+                        <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="btn-primary">
+                            GitHub Repo
+                        </a>
                         <Link to="/technology" className="btn-secondary">
                             Read Architecture
                         </Link>

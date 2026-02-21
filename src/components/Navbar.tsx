@@ -26,11 +26,11 @@ export default function Navbar() {
                 <nav className="nav-links">
                     <Link to="/" className="nav-link">Home</Link>
                     <Link to="/technology" className="nav-link">Technology</Link>
-                    <a href="/#download" className="nav-link">Download</a>
+                    <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="nav-link">GitHub</a>
                 </nav>
 
                 <div className="nav-actions">
-                    <a href="#get-started" className="btn-primary btn-sm">Get Started</a>
+                    <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="btn-primary btn-sm">GitHub Repo</a>
                 </div>
             </div>
         </header>
