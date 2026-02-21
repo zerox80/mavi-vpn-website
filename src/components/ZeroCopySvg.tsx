@@ -1,7 +1,7 @@
 export default function ZeroCopySvg() {
     return (
         <svg
-            viewBox="0 0 800 400"
+            viewBox="0 0 850 400"
             className="w-full h-auto text-primary"
             style={{ fontFamily: 'Inter, sans-serif' }}
         >
@@ -42,68 +42,68 @@ export default function ZeroCopySvg() {
             </defs>
 
             {/* Background Architecture Areas */}
-            <rect width="800" height="400" fill="transparent" />
+            <rect width="850" height="400" fill="transparent" />
 
             {/* Kernel Space (TUN) */}
-            <rect x="50" y="40" width="220" height="260" rx="10" fill="url(#kernelGrad)" stroke="var(--border-light)" strokeWidth="2" strokeDasharray="4 4" />
-            <text x="160" y="80" textAnchor="middle" fill="var(--text-primary)" fontSize="22" fontWeight="700">OS Kernel</text>
-            <text x="160" y="105" textAnchor="middle" fill="var(--text-secondary)" fontSize="14">Virtual Network Layer</text>
+            <rect x="20" y="20" width="240" height="360" rx="12" fill="url(#kernelGrad)" stroke="var(--border-light)" strokeWidth="2" strokeDasharray="6 6" />
+            <text x="140" y="70" textAnchor="middle" fill="var(--text-primary)" fontSize="26" fontWeight="700">OS Kernel</text>
+            <text x="140" y="100" textAnchor="middle" fill="var(--text-secondary)" fontSize="16">Virtual Network Layer</text>
 
             {/* Userspace (Rust Core) */}
-            <rect x="290" y="40" width="220" height="260" rx="10" fill="url(#userspaceGrad)" stroke="var(--accent-base)" strokeWidth="2" filter="url(#zcSubtleGlow)" />
-            <text x="400" y="80" textAnchor="middle" fill="var(--text-primary)" fontSize="22" fontWeight="700">Mavi Rust Core</text>
-            <text x="400" y="105" textAnchor="middle" fill="var(--text-secondary)" fontSize="14">tokio async runtime</text>
+            <rect x="305" y="20" width="240" height="360" rx="12" fill="url(#userspaceGrad)" stroke="var(--accent-base)" strokeWidth="2" filter="url(#zcSubtleGlow)" />
+            <text x="425" y="70" textAnchor="middle" fill="var(--text-primary)" fontSize="26" fontWeight="700">Mavi Rust Core</text>
+            <text x="425" y="100" textAnchor="middle" fill="var(--text-secondary)" fontSize="16">tokio async runtime</text>
 
             {/* Network Interface (QUIC) */}
-            <rect x="530" y="40" width="220" height="260" rx="10" fill="url(#kernelGrad)" stroke="var(--border-light)" strokeWidth="2" strokeDasharray="4 4" />
-            <text x="640" y="80" textAnchor="middle" fill="var(--text-primary)" fontSize="22" fontWeight="700">Network NIC</text>
-            <text x="640" y="105" textAnchor="middle" fill="var(--text-secondary)" fontSize="14">Physical Wire</text>
+            <rect x="590" y="20" width="240" height="360" rx="12" fill="url(#kernelGrad)" stroke="var(--border-light)" strokeWidth="2" strokeDasharray="6 6" />
+            <text x="710" y="70" textAnchor="middle" fill="var(--text-primary)" fontSize="26" fontWeight="700">Network NIC</text>
+            <text x="710" y="100" textAnchor="middle" fill="var(--text-secondary)" fontSize="16">Physical Wire</text>
 
             {/* Components */}
             {/* TUN Interface */}
-            <rect x="100" y="140" width="120" height="60" rx="6" fill="var(--bg-primary)" stroke="#3b82f6" strokeWidth="2" />
-            <text x="160" y="176" textAnchor="middle" fill="var(--text-primary)" fontSize="18" fontWeight="600">TUN (tun0)</text>
+            <rect x="60" y="170" width="160" height="60" rx="8" fill="var(--bg-primary)" stroke="#3b82f6" strokeWidth="2" />
+            <text x="140" y="207" textAnchor="middle" fill="var(--text-primary)" fontSize="20" fontWeight="600">TUN (tun0)</text>
 
             {/* Bytes Buffer Handle (Zero Copy logic) */}
-            <rect x="340" y="140" width="120" height="60" rx="6" fill="var(--bg-primary)" stroke="var(--accent-base)" strokeWidth="2" filter="url(#zcGlow)" />
-            <text x="400" y="167" textAnchor="middle" fill="var(--text-primary)" fontSize="18" fontWeight="600">Bytes Ref</text>
-            <text x="400" y="185" textAnchor="middle" fill="var(--text-secondary)" fontSize="12" fontFamily="monospace">split_to().freeze()</text>
+            <rect x="345" y="170" width="160" height="60" rx="8" fill="var(--bg-primary)" stroke="var(--accent-base)" strokeWidth="2" filter="url(#zcGlow)" />
+            <text x="425" y="198" textAnchor="middle" fill="var(--text-primary)" fontSize="20" fontWeight="600">Bytes Ref</text>
+            <text x="425" y="218" textAnchor="middle" fill="var(--text-secondary)" fontSize="14" fontFamily="monospace">split().freeze()</text>
 
             {/* UDP Socket */}
-            <rect x="580" y="140" width="120" height="60" rx="6" fill="var(--bg-primary)" stroke="#8b5cf6" strokeWidth="2" />
-            <text x="640" y="176" textAnchor="middle" fill="var(--text-primary)" fontSize="18" fontWeight="600">UDP Port 443</text>
+            <rect x="630" y="170" width="160" height="60" rx="8" fill="var(--bg-primary)" stroke="#8b5cf6" strokeWidth="2" />
+            <text x="710" y="207" textAnchor="middle" fill="var(--text-primary)" fontSize="20" fontWeight="600">UDP Port 443</text>
 
             {/* Paths / Lines */}
-            <line x1="220" y1="170" x2="330" y2="170" stroke="var(--text-secondary)" strokeWidth="2" markerEnd="url(#zcArrow)" />
-            <line x1="460" y1="170" x2="570" y2="170" stroke="var(--text-secondary)" strokeWidth="2" markerEnd="url(#zcArrow)" />
+            <line x1="220" y1="200" x2="335" y2="200" stroke="var(--text-secondary)" strokeWidth="2" markerEnd="url(#zcArrow)" />
+            <line x1="505" y1="200" x2="620" y2="200" stroke="var(--text-secondary)" strokeWidth="2" markerEnd="url(#zcArrow)" />
 
             {/* Labels explaining Zero-copy */}
-            <text x="275" y="160" textAnchor="middle" fill="var(--accent-base)" fontSize="12" fontWeight="600">1. Async Read</text>
-            <text x="515" y="160" textAnchor="middle" fill="var(--accent-base)" fontSize="12" fontWeight="600">2. Enqueue (No Clone)</text>
+            <text x="277" y="185" textAnchor="middle" fill="var(--accent-base)" fontSize="13" fontWeight="600">1. Read</text>
+            <text x="562" y="185" textAnchor="middle" fill="var(--accent-base)" fontSize="13" fontWeight="600">2. Enqueue</text>
 
             {/* Animated Packets */}
             {/* Tun -> Rust Buffer */}
-            <g transform="translate(0, 170)">
+            <g transform="translate(0, 200)">
                 <circle r="6" fill="url(#tunGrad)">
-                    <animate attributeName="cx" values="220; 340" dur="2s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="1; 1; 0" dur="2s" keyTimes="0; 0.9; 1" repeatCount="indefinite" />
+                    <animate attributeName="cx" values="220; 345" dur="1.5s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="1; 1; 0" dur="1.5s" keyTimes="0; 0.9; 1" repeatCount="indefinite" />
                 </circle>
                 <circle r="4" fill="#ffffff" opacity="0.8">
-                    <animate attributeName="cx" values="220; 340" dur="2s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="1; 1; 0" dur="2s" keyTimes="0; 0.9; 1" repeatCount="indefinite" />
+                    <animate attributeName="cx" values="220; 345" dur="1.5s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="1; 1; 0" dur="1.5s" keyTimes="0; 0.9; 1" repeatCount="indefinite" />
                 </circle>
             </g>
 
             {/* Rust Buffer -> QUIC (Encrypted output) */}
-            <g transform="translate(0, 170)">
+            <g transform="translate(0, 200)">
                 <circle r="6" fill="url(#quicGrad)">
                     {/* Delayed start to simulate flow */}
-                    <animate attributeName="cx" values="460; 580" dur="2s" begin="1s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0; 1; 1; 0" dur="2s" begin="1s" keyTimes="0; 0.1; 0.9; 1" repeatCount="indefinite" />
+                    <animate attributeName="cx" values="505; 630" dur="1.5s" begin="0.75s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0; 1; 1; 0" dur="1.5s" begin="0.75s" keyTimes="0; 0.1; 0.9; 1" repeatCount="indefinite" />
                 </circle>
                 <circle r="4" fill="#ffffff" opacity="0.8">
-                    <animate attributeName="cx" values="460; 580" dur="2s" begin="1s" repeatCount="indefinite" />
-                    <animate attributeName="opacity" values="0; 1; 1; 0" dur="2s" begin="1s" keyTimes="0; 0.1; 0.9; 1" repeatCount="indefinite" />
+                    <animate attributeName="cx" values="505; 630" dur="1.5s" begin="0.75s" repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0; 1; 1; 0" dur="1.5s" begin="0.75s" keyTimes="0; 0.1; 0.9; 1" repeatCount="indefinite" />
                 </circle>
             </g>
         </svg>
