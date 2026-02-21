@@ -46,43 +46,40 @@ export default function ZeroCopySvg() {
 
             {/* Kernel Space (TUN) */}
             <rect x="50" y="40" width="220" height="260" rx="10" fill="url(#kernelGrad)" stroke="var(--border-light)" strokeWidth="2" strokeDasharray="4 4" />
-            <text x="160" y="75" textAnchor="middle" fill="var(--text-primary)" fontSize="16" fontWeight="700">OS Kernel</text>
-            <text x="160" y="95" textAnchor="middle" fill="var(--text-secondary)" fontSize="12">Virtual Network Layer</text>
+            <text x="160" y="80" textAnchor="middle" fill="var(--text-primary)" fontSize="22" fontWeight="700">OS Kernel</text>
+            <text x="160" y="105" textAnchor="middle" fill="var(--text-secondary)" fontSize="14">Virtual Network Layer</text>
 
             {/* Userspace (Rust Core) */}
             <rect x="290" y="40" width="220" height="260" rx="10" fill="url(#userspaceGrad)" stroke="var(--accent-base)" strokeWidth="2" filter="url(#zcSubtleGlow)" />
-            <text x="400" y="75" textAnchor="middle" fill="var(--text-primary)" fontSize="16" fontWeight="700">Mavi Rust Core</text>
-            <text x="400" y="95" textAnchor="middle" fill="var(--text-secondary)" fontSize="12">tokio async runtime</text>
+            <text x="400" y="80" textAnchor="middle" fill="var(--text-primary)" fontSize="22" fontWeight="700">Mavi Rust Core</text>
+            <text x="400" y="105" textAnchor="middle" fill="var(--text-secondary)" fontSize="14">tokio async runtime</text>
 
             {/* Network Interface (QUIC) */}
             <rect x="530" y="40" width="220" height="260" rx="10" fill="url(#kernelGrad)" stroke="var(--border-light)" strokeWidth="2" strokeDasharray="4 4" />
-            <text x="640" y="75" textAnchor="middle" fill="var(--text-primary)" fontSize="16" fontWeight="700">Network NIC</text>
-            <text x="640" y="95" textAnchor="middle" fill="var(--text-secondary)" fontSize="12">Physical Wire</text>
+            <text x="640" y="80" textAnchor="middle" fill="var(--text-primary)" fontSize="22" fontWeight="700">Network NIC</text>
+            <text x="640" y="105" textAnchor="middle" fill="var(--text-secondary)" fontSize="14">Physical Wire</text>
 
             {/* Components */}
             {/* TUN Interface */}
-            <rect x="100" y="145" width="120" height="50" rx="6" fill="var(--bg-primary)" stroke="#3b82f6" strokeWidth="2" />
-            <text x="160" y="175" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="600">TUN (tun0)</text>
+            <rect x="100" y="140" width="120" height="60" rx="6" fill="var(--bg-primary)" stroke="#3b82f6" strokeWidth="2" />
+            <text x="160" y="176" textAnchor="middle" fill="var(--text-primary)" fontSize="18" fontWeight="600">TUN (tun0)</text>
 
             {/* Bytes Buffer Handle (Zero Copy logic) */}
-            <rect x="340" y="145" width="120" height="50" rx="6" fill="var(--bg-primary)" stroke="var(--accent-base)" strokeWidth="2" filter="url(#zcGlow)" />
-            <text x="400" y="167" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="600">Bytes Ref</text>
-            <text x="400" y="183" textAnchor="middle" fill="var(--text-secondary)" fontSize="10" fontFamily="monospace">split_to().freeze()</text>
+            <rect x="340" y="140" width="120" height="60" rx="6" fill="var(--bg-primary)" stroke="var(--accent-base)" strokeWidth="2" filter="url(#zcGlow)" />
+            <text x="400" y="167" textAnchor="middle" fill="var(--text-primary)" fontSize="18" fontWeight="600">Bytes Ref</text>
+            <text x="400" y="185" textAnchor="middle" fill="var(--text-secondary)" fontSize="12" fontFamily="monospace">split_to().freeze()</text>
 
             {/* UDP Socket */}
-            <rect x="580" y="145" width="120" height="50" rx="6" fill="var(--bg-primary)" stroke="#8b5cf6" strokeWidth="2" />
-            <text x="640" y="175" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="600">UDP Port 443</text>
+            <rect x="580" y="140" width="120" height="60" rx="6" fill="var(--bg-primary)" stroke="#8b5cf6" strokeWidth="2" />
+            <text x="640" y="176" textAnchor="middle" fill="var(--text-primary)" fontSize="18" fontWeight="600">UDP Port 443</text>
 
             {/* Paths / Lines */}
             <line x1="220" y1="170" x2="330" y2="170" stroke="var(--text-secondary)" strokeWidth="2" markerEnd="url(#zcArrow)" />
             <line x1="460" y1="170" x2="570" y2="170" stroke="var(--text-secondary)" strokeWidth="2" markerEnd="url(#zcArrow)" />
 
             {/* Labels explaining Zero-copy */}
-            <text x="280" y="160" textAnchor="middle" fill="var(--accent-base)" fontSize="11" fontWeight="600">1. Async Read</text>
-            <text x="515" y="160" textAnchor="middle" fill="var(--accent-base)" fontSize="11" fontWeight="600">2. Enqueue (No Clone)</text>
-
-            {/* Bottom Global Text */}
-            <text x="400" y="340" textAnchor="middle" fill="var(--text-primary)" fontSize="14" fontWeight="700">Zero-Copy Datapath: Pass reference handle instead of memory copying.</text>
+            <text x="275" y="160" textAnchor="middle" fill="var(--accent-base)" fontSize="12" fontWeight="600">1. Async Read</text>
+            <text x="515" y="160" textAnchor="middle" fill="var(--accent-base)" fontSize="12" fontWeight="600">2. Enqueue (No Clone)</text>
 
             {/* Animated Packets */}
             {/* Tun -> Rust Buffer */}
