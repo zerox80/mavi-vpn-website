@@ -5,7 +5,7 @@ const features = [
     {
         icon: <EyeOff className="text-accent" size={32} strokeWidth={1.5} />,
         title: 'Censorship Resistance (CR Mode)',
-        description: 'Bypass strict firewalls (GFW, Corporate). Mavi VPN uses ALPN h3 (HTTP/3) masquerading to appear identically to standard web traffic, evading Deep Packet Inspection.',
+        description: 'Bypass strict firewalls (GFW, Corporate). Mavi VPN uses ALPN h3 masquerading and actively deflects DPI scanners by simulating a legitimate HTTP/3 Web-Server with valid QPACK frames.',
     },
     {
         icon: <Globe2 className="text-accent" size={32} strokeWidth={1.5} />,
