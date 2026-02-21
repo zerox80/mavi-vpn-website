@@ -1,7 +1,7 @@
 export default function HandshakeSvg() {
     return (
         <svg
-            viewBox="0 0 800 400"
+            viewBox="0 0 850 400"
             className="w-full h-auto text-primary"
             style={{ fontFamily: 'Inter, sans-serif' }}
         >
@@ -36,7 +36,7 @@ export default function HandshakeSvg() {
             </defs>
 
             {/* --- Background --- */}
-            <rect width="800" height="400" fill="transparent" />
+            <rect width="850" height="400" fill="transparent" />
 
             {/* --- Entities --- */}
             {/* Client Node */}
