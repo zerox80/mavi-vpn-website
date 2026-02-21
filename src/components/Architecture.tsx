@@ -1,11 +1,11 @@
-﻿
-
+﻿import ZeroCopySvg from './ZeroCopySvg';
 
 export default function Architecture() {
     return (
         <section className="architecture-section" id="architecture">
-            <div className="container">
+            <div className="container" style={{ display: 'flex', flexDirection: 'column', gap: '6rem' }}>
 
+                {/* --- Pinned MTU Section --- */}
                 <div className="architecture-grid">
 
                     <div className="architecture-content">
@@ -42,6 +42,27 @@ export default function Architecture() {
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                </div>
+
+                {/* --- Zero Copy Section --- */}
+                <div className="architecture-grid">
+
+                    <div className="architecture-visual">
+                        <div className="diagram-container glass-panel" style={{ padding: '1rem', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                            <ZeroCopySvg />
+                        </div>
+                    </div>
+
+                    <div className="architecture-content">
+                        <h2 className="section-title">Zero-Copy Datapath.</h2>
+                        <p className="architecture-description">
+                            Traditional VPNs copy packet bytes multiple times between the kernel sequence and user spaces, destroying throughput and wasting CPU cycles on unnecessary memory allocations.
+                        </p>
+                        <p className="architecture-description">
+                            Mavi VPN utilizes an advanced <strong>Zero-Copy Datapath</strong> architecture written in asynchronous Rust. Packets read from the raw TUN interface are immediately wrapped into a reference-counted <code>Bytes</code> handle and enqueued directly into the QUIC engine without a single memory clone. Maximum performance, pure efficiency.
+                        </p>
                     </div>
 
                 </div>

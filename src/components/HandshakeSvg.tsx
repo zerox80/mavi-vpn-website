@@ -76,9 +76,9 @@ export default function HandshakeSvg() {
 
             {/* Branch A: Invalid (CR Mode Defense) */}
             <path d="M 630 230 Q 720 230 720 260 Q 720 290 630 290" fill="none" stroke="var(--border-light)" strokeWidth="2" strokeDasharray="4 2" markerEnd="url(#arrow)" />
-            <text x="760" y="255" textAnchor="middle" fill="var(--text-secondary)" fontSize="11" fontWeight="600">If invalid token / active probe:</text>
-            <text x="760" y="270" textAnchor="middle" fill="var(--text-secondary)" fontSize="11">Return standard Nginx 200 OK</text>
-            <text x="760" y="285" textAnchor="middle" fill="var(--text-secondary)" fontSize="11">Do NOT reset connection</text>
+            <text x="760" y="255" textAnchor="middle" fill="var(--text-secondary)" fontSize="11" fontWeight="600">If invalid token / probe:</text>
+            <text x="760" y="270" textAnchor="middle" fill="var(--text-secondary)" fontSize="11">Send HTTP/3 QPACK Frames</text>
+            <text x="760" y="285" textAnchor="middle" fill="var(--text-secondary)" fontSize="11">Simulate NGINX (Deflect)</text>
 
             {/* Branch B: Valid (VPN Payload) */}
             <g transform="translate(170, 310)">
