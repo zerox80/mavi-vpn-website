@@ -9,7 +9,7 @@ export default function Footer() {
                 <div className="footer-content">
                     <div className="footer-brand">
                         <div className="footer-brand-logo" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                            <img src="/mavi-logo.png" alt="Mavi VPN Logo" style={{ height: '32px', width: 'auto', borderRadius: '6px' }} />
+                            <img src="/mavi-logo.png" alt="Mavi VPN Logo" style={{ height: '48px', width: 'auto', borderRadius: '8px' }} />
                             <span className="logo-text">Mavi<span className="logo-accent">VPN</span></span>
                         </div>
                         <p className="footer-tagline">Engineered for absolute invisibility and uncompromised performance.</p>

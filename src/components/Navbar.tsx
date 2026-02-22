@@ -18,7 +18,7 @@ export default function Navbar() {
             <div className="container navbar-container">
                 <Link to="/" className="logo-group">
                     <div className="logo-icon-wrapper">
-                        <img src="/mavi-logo.png" alt="Mavi VPN Logo" style={{ height: '32px', width: 'auto', borderRadius: '6px' }} />
+                        <img src="/mavi-logo.png" alt="Mavi VPN Logo" style={{ height: '48px', width: 'auto', borderRadius: '8px' }} />
                     </div>
                     <span className="logo-text">Mavi<span className="logo-accent">VPN</span></span>
                 </Link>
