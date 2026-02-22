@@ -1,5 +1,5 @@
 ﻿import { useState, useEffect } from 'react';
-import { Shield } from 'lucide-react';
+
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
@@ -18,7 +18,7 @@ export default function Navbar() {
             <div className="container navbar-container">
                 <Link to="/" className="logo-group">
                     <div className="logo-icon-wrapper">
-                        <Shield className="logo-icon" size={24} strokeWidth={2.5} />
+                        <img src="/mavi-logo.png" alt="Mavi VPN Logo" style={{ height: '32px', width: 'auto', borderRadius: '6px' }} />
                     </div>
                     <span className="logo-text">Mavi<span className="logo-accent">VPN</span></span>
                 </Link>
