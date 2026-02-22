@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { FileText, Shield, Zap, Lock, Activity, Server, Smartphone, Globe } from 'lucide-react';
 
 export default function Whitepaper() {
