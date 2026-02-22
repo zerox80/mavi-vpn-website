@@ -26,6 +26,7 @@ export default function Navbar() {
                 <nav className="nav-links">
                     <Link to="/" className="nav-link">Home</Link>
                     <Link to="/technology" className="nav-link">Technology</Link>
+                    <Link to="/whitepaper" className="nav-link">Whitepaper</Link>
                     <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="nav-link">GitHub</a>
                 </nav>
 

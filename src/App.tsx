@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 // Pages
 import Home from './pages/Home';
 import Technology from './pages/Technology';
+import Whitepaper from './pages/Whitepaper';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/technology" element={<Technology />} />
+          <Route path="/whitepaper" element={<Whitepaper />} />
         </Routes>
       </main>
       <Footer />
