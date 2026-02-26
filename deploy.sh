@@ -7,9 +7,10 @@ WEB_DIR="/var/www/mavi-vpn"
 echo "🚀 Deploying Mavi VPN Website..."
 
 # Pull latest changes
-echo "📥 Resetting local changes and pulling..."
+echo "📥 Resetting, cleaning and pulling..."
 cd "$REPO_DIR"
 git reset --hard
+git clean -fd
 git pull
 
 # Install dependencies & build
