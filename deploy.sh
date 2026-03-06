@@ -25,6 +25,6 @@ echo "🧹 Cleaning old deployment..."
 sudo rm -rf "$WEB_DIR"/*
 
 echo "📂 Copying new build..."
-sudo cp -r "$REPO_DIR/dist" "$WEB_DIR/"
+sudo cp -r "$REPO_DIR/dist/"* "$WEB_DIR/"
 
 echo "✅ Deployment complete!"
