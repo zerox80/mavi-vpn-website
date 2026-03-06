@@ -22,7 +22,7 @@ export default function Whitepaper() {
                         <div className="whitepaper-meta animate-fade-in" style={{ animationDelay: '300ms' }}>
                             <span>By: Mavi Dev Team</span>
                             <span className="meta-divider">•</span>
-                            <span>Updated: 2024</span>
+                            <span>Updated: 2026</span>
                         </div>
                     </div>
                 </div>
