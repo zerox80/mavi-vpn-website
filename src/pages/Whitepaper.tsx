@@ -1,5 +1,5 @@
 
-import { FileText, Shield, Zap, Lock, Activity, Server, Smartphone, Globe, Network, Cpu, Database, AlertTriangle, CheckCircle, BookOpen, Layers } from 'lucide-react';
+import { FileText, Shield, Zap, Lock, Activity, Server, Smartphone, Globe, Cpu, CheckCircle, BookOpen, Layers } from 'lucide-react';
 
 export default function Whitepaper() {
     return (
