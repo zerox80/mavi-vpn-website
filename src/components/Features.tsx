@@ -1,5 +1,5 @@
 import { EyeOff, Cpu, Globe2, Zap, Smartphone, Key } from 'lucide-react';
-import { motion, Variants } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 
 const features = [
     {
