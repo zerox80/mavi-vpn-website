@@ -1,5 +1,6 @@
-﻿import { Link } from 'react-router-dom';
-import { ShieldAlert, Zap, Lock } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ShieldAlert, Zap, Globe2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 export default function Hero() {
     return (
@@ -9,7 +10,12 @@ export default function Hero() {
                 {/* Abstract Background Element (CSS based) */}
                 <div className="hero-glow"></div>
 
-                <div className="hero-content animate-fade-in">
+                <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="hero-content"
+                >
                     <div className="badge">
                         <span className="badge-pulse"></span>
                         Protocol: QUIC / UDP
@@ -20,7 +26,7 @@ export default function Hero() {
                     </h1>
 
                     <p className="hero-subtitle">
-                        The next-generation VPN engineered to defeat Deep Packet Inspection.
+                        The next-generation cross-platform VPN engineered to defeat Deep Packet Inspection.
                         Powered by HTTP/3 masquerading and a Zero-Copy Rust datapath.
                     </p>
 
@@ -43,11 +49,11 @@ export default function Hero() {
                             <span>CR Mode (Anti-Censorship)</span>
                         </div>
                         <div className="feature-mini">
-                            <Lock className="feature-icon text-accent" size={20} />
-                            <span>Pinned MTU Engine</span>
+                            <Globe2 className="feature-icon text-accent" size={20} />
+                            <span>Seamless Mobile Roaming</span>
                         </div>
                     </div>
-                </div>
+                </motion.div>
 
             </div>
         </section>

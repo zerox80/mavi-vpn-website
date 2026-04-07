@@ -56,6 +56,32 @@ export default function Technology() {
                 </div>
             </section>
 
+            <section className="container" style={{ marginBottom: 'var(--spacing-xl)' }}>
+                <h2 className="section-title text-center" style={{ marginBottom: 'var(--spacing-lg)' }}>Seamless Roaming</h2>
+                <div className="glass-panel" style={{ padding: 'var(--spacing-lg)' }}>
+                    <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>QUIC Connection Migration</h3>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1rem' }}>
+                        Mobile networks are inherently unstable. Moving between Wi-Fi and 5G typically changes your IP address, completely breaking open TCP and legacy UDP connections. This forces standard VPNs to initiate a new cryptographic handshake, causing connection drops or "stuck" traffic.
+                    </p>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
+                        By utilizing the robust Connection Migration features of the QUIC protocol, our client detects network switches and instantly migrates the existing TLS 1.3 session to the new network interface without re-authenticating. The IP addresses of the tunnel remain stable, ensuring continuous connectivity for background downloads, VoIP calls, and active TCP sessions.
+                    </p>
+                </div>
+            </section>
+
+            <section className="container" style={{ marginBottom: 'var(--spacing-xl)' }}>
+                <h2 className="section-title text-center" style={{ marginBottom: 'var(--spacing-lg)' }}>Enterprise Access Control</h2>
+                <div className="glass-panel" style={{ padding: 'var(--spacing-lg)' }}>
+                    <h3 style={{ fontSize: '1.25rem', marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Keycloak OIDC Integration</h3>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, marginBottom: '1rem' }}>
+                        For corporate environments, static tokens are insufficient. Mavi VPN integrates natively with Keycloak environments acting as a secure OIDC Resource Server.
+                    </p>
+                    <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
+                        Clients securely obtain JSON Web Tokens (JWT) which are then sent to the Mavi VPN server on connection time. The backend validates the cryptographic signature against the Keycloak public JWKS endpoints, ensuring robust authentication, Multi-Factor Authentication (MFA), and absolute administrative control over VPN tunnel assignments.
+                    </p>
+                </div>
+            </section>
+
         </div>
     );
 }
