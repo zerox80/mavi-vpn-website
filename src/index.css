@@ -730,16 +730,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Animated gradient border */
-@property --border-angle {
-  syntax: '<angle>';
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes borderRotate {
-  to { --border-angle: 360deg; }
-}
-
 .feature-card {
   padding: var(--spacing-lg);
   transition: all var(--transition-normal);
@@ -763,32 +753,13 @@ h1, h2, h3, h4, h5, h6 {
   transition: opacity var(--transition-normal);
 }
 
-.feature-card::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: var(--radius-lg);
-  padding: 1px;
-  background: conic-gradient(from var(--border-angle), var(--accent-base), var(--accent-warm), var(--accent-base));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity var(--transition-normal);
-  animation: borderRotate 4s linear infinite;
-  pointer-events: none;
-}
-
 .feature-card:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-xl), 0 0 0 1px rgba(45, 91, 227, 0.12);
+  border-color: rgba(45, 91, 227, 0.15);
 }
 
 .feature-card:hover::before {
-  opacity: 1;
-}
-
-.feature-card:hover::after {
   opacity: 1;
 }
 
