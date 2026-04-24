@@ -472,8 +472,7 @@ p {
   background: var(--bg-secondary);
 }
 
-.feature-card::before { display: none; }
-.feature-number { display: none; }
+
 
 .feature-icon-wrapper {
   display: inline-flex;

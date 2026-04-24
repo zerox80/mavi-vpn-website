@@ -45,17 +45,17 @@ export default function ZeroCopySvg() {
             <rect width="850" height="400" fill="transparent" />
 
             {/* Kernel Space (TUN) */}
-            <rect x="20" y="20" width="240" height="360" rx="12" fill="url(#kernelGrad)" stroke="var(--border-light)" strokeWidth="2" strokeDasharray="6 6" />
+            <rect x="20" y="20" width="240" height="360" rx="12" fill="url(#kernelGrad)" stroke="var(--border)" strokeWidth="2" strokeDasharray="6 6" />
             <text x="140" y="70" textAnchor="middle" fill="var(--text-primary)" fontSize="26" fontWeight="700">OS Kernel</text>
             <text x="140" y="100" textAnchor="middle" fill="var(--text-secondary)" fontSize="16">Virtual Network Layer</text>
 
             {/* Userspace (Rust Core) */}
-            <rect x="305" y="20" width="240" height="360" rx="12" fill="url(#userspaceGrad)" stroke="var(--accent-base)" strokeWidth="2" filter="url(#zcSubtleGlow)" />
+            <rect x="305" y="20" width="240" height="360" rx="12" fill="url(#userspaceGrad)" stroke="var(--accent)" strokeWidth="2" filter="url(#zcSubtleGlow)" />
             <text x="425" y="70" textAnchor="middle" fill="var(--text-primary)" fontSize="26" fontWeight="700">Mavi Rust Core</text>
             <text x="425" y="100" textAnchor="middle" fill="var(--text-secondary)" fontSize="16">tokio async runtime</text>
 
             {/* Network Interface (QUIC) */}
-            <rect x="590" y="20" width="240" height="360" rx="12" fill="url(#kernelGrad)" stroke="var(--border-light)" strokeWidth="2" strokeDasharray="6 6" />
+            <rect x="590" y="20" width="240" height="360" rx="12" fill="url(#kernelGrad)" stroke="var(--border)" strokeWidth="2" strokeDasharray="6 6" />
             <text x="710" y="70" textAnchor="middle" fill="var(--text-primary)" fontSize="26" fontWeight="700">Network NIC</text>
             <text x="710" y="100" textAnchor="middle" fill="var(--text-secondary)" fontSize="16">Physical Wire</text>
 
@@ -65,7 +65,7 @@ export default function ZeroCopySvg() {
             <text x="140" y="207" textAnchor="middle" fill="var(--text-primary)" fontSize="20" fontWeight="600">TUN (tun0)</text>
 
             {/* Bytes Buffer Handle (Zero Copy logic) */}
-            <rect x="345" y="170" width="160" height="60" rx="8" fill="var(--bg-primary)" stroke="var(--accent-base)" strokeWidth="2" filter="url(#zcGlow)" />
+            <rect x="345" y="170" width="160" height="60" rx="8" fill="var(--bg-primary)" stroke="var(--accent)" strokeWidth="2" filter="url(#zcGlow)" />
             <text x="425" y="198" textAnchor="middle" fill="var(--text-primary)" fontSize="20" fontWeight="600">Bytes Ref</text>
             <text x="425" y="218" textAnchor="middle" fill="var(--text-secondary)" fontSize="14" fontFamily="monospace">split().freeze()</text>
 
@@ -78,8 +78,8 @@ export default function ZeroCopySvg() {
             <line x1="505" y1="200" x2="620" y2="200" stroke="var(--text-secondary)" strokeWidth="2" markerEnd="url(#zcArrow)" />
 
             {/* Labels explaining Zero-copy */}
-            <text x="277" y="185" textAnchor="middle" fill="var(--accent-base)" fontSize="13" fontWeight="600">1. Read</text>
-            <text x="562" y="185" textAnchor="middle" fill="var(--accent-base)" fontSize="13" fontWeight="600">2. Enqueue</text>
+            <text x="277" y="185" textAnchor="middle" fill="var(--accent)" fontSize="13" fontWeight="600">1. Read</text>
+            <text x="562" y="185" textAnchor="middle" fill="var(--accent)" fontSize="13" fontWeight="600">2. Enqueue</text>
 
             {/* Animated Packets */}
             {/* Tun -> Rust Buffer */}
