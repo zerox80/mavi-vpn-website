@@ -11,14 +11,14 @@ export default function Footer() {
             <div className="container">
                 <div className="footer-content">
                     <div className="footer-brand">
-                        <div className="footer-brand-logo" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                            <img src="/mavi-logo.png" alt="Mavi VPN Logo" style={{ height: '48px', width: 'auto', borderRadius: '8px' }} />
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                            <img src="/mavi-logo.png" alt="Mavi VPN Logo" style={{ height: '40px', width: 'auto', borderRadius: '8px' }} />
                             <span className="logo-text">Mavi<span className="logo-accent">VPN</span></span>
                         </div>
-                        <p className="footer-tagline">High-performance, censorship-resistant VPN built with Rust. v0.9</p>
+                        <p className="footer-tagline">High-performance, censorship-resistant VPN built with Rust.</p>
                         <div className="footer-social">
                             <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="GitHub">
-                                <Github size={18} />
+                                <Github size={16} />
                             </a>
                         </div>
                     </div>
@@ -39,9 +39,9 @@ export default function Footer() {
                 </div>
                 <div className="footer-bottom">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-                        <p>&copy; {new Date().getFullYear()} Mavi Dev Team. All rights reserved.</p>
+                        <p>&copy; {new Date().getFullYear()} Mavi Dev Team.</p>
                         <button className="footer-back-top" onClick={scrollToTop}>
-                            Back to top <ArrowUp size={14} />
+                            Back to top <ArrowUp size={12} />
                         </button>
                     </div>
                 </div>

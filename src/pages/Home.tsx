@@ -12,25 +12,25 @@ export default function Home() {
 
             <section className="cta-section">
                 <motion.div
-                    className="cta-panel glass-panel"
-                    initial={{ opacity: 0, y: 20 }}
+                    className="cta-panel"
+                    initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.5 }}
                 >
                     <div className="cta-icon">
-                        <FileText size={24} />
+                        <FileText size={22} />
                     </div>
                     <h3 className="cta-title">Want to look under the hood?</h3>
                     <p className="cta-subtitle">
-                        Explore MASQUE framing, ECH GREASE, the Pinned MTU engine, and the QUIC Zero-Copy datapath in our technical deep dive.
+                        Explore MASQUE framing, ECH GREASE, the Pinned MTU engine, and the QUIC Zero-Copy datapath.
                     </p>
                     <div className="cta-actions">
                         <a href="/technology" className="btn-primary">
-                            Read Technical Deep Dive <ArrowRight size={16} style={{ marginLeft: '0.4rem' }} />
+                            Technical Deep Dive <ArrowRight size={15} style={{ marginLeft: '0.3rem' }} />
                         </a>
                         <a href="/whitepaper" className="btn-secondary">
-                            Read Whitepaper
+                            Whitepaper
                         </a>
                     </div>
                 </motion.div>
