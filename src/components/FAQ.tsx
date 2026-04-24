@@ -49,9 +49,9 @@ export default function FAQ() {
     };
 
     return (
-        <section className="faq-section" id="faq" style={{ padding: 'var(--spacing-xl) 0', background: 'var(--bg-secondary)' }}>
+        <section className="faq-section" id="faq">
             <div className="container">
-                <div className="section-header text-center" style={{ marginBottom: 'var(--spacing-lg)' }}>
+                <div className="section-header text-center faq-header">
                     <motion.h2 
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -73,7 +73,7 @@ export default function FAQ() {
                     </motion.p>
                 </div>
 
-                <div className="faq-container" style={{ maxWidth: '800px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <div className="faq-container">
                     {faqs.map((faq, index) => {
                         const isOpen = openIndex === index;
                         return (
@@ -84,38 +84,18 @@ export default function FAQ() {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1, duration: 0.5 }}
                                 className={`faq-item glass-panel ${isOpen ? 'open' : ''}`}
-                                style={{
-                                    borderRadius: 'var(--radius-md)',
-                                    border: '1px solid var(--border-light)',
-                                    overflow: 'hidden',
-                                    background: 'var(--bg-primary)'
-                                }}
                             >
                                 <button
                                     className="faq-question"
                                     onClick={() => toggleFaq(index)}
-                                    style={{
-                                        width: '100%',
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        alignItems: 'center',
-                                        padding: '1.25rem',
-                                        background: 'none',
-                                        border: 'none',
-                                        color: 'var(--text-primary)',
-                                        fontSize: '1.1rem',
-                                        fontWeight: '600',
-                                        cursor: 'pointer',
-                                        textAlign: 'left'
-                                    }}
                                 >
                                     {faq.question}
                                     <motion.div
+                                        className="faq-question-icon"
                                         animate={{ rotate: isOpen ? 180 : 0 }}
                                         transition={{ duration: 0.3 }}
-                                        style={{ flexShrink: 0, marginLeft: '1rem' }}
                                     >
-                                        <ChevronDown size={20} className="text-secondary" />
+                                        <ChevronDown size={20} />
                                     </motion.div>
                                 </button>
                                 <AnimatePresence>
@@ -128,15 +108,7 @@ export default function FAQ() {
                                             transition={{ duration: 0.3, ease: "easeInOut" }}
                                             style={{ overflow: 'hidden' }}
                                         >
-                                            <p
-                                                className="faq-answer"
-                                                style={{
-                                                    padding: '0 1.25rem 1.25rem',
-                                                    color: 'var(--text-secondary)',
-                                                    lineHeight: '1.6',
-                                                    margin: 0
-                                                }}
-                                            >
+                                            <p className="faq-answer">
                                                 {faq.answer}
                                             </p>
                                         </motion.div>

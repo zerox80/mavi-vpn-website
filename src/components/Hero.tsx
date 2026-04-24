@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShieldAlert, Zap, Globe2, ShieldCheck } from 'lucide-react';
+import { ShieldAlert, Zap, Globe2, ShieldCheck, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Hero() {
@@ -15,6 +15,10 @@ export default function Hero() {
                     transition={{ duration: 0.8, ease: "easeOut" }}
                     className="hero-content"
                 >
+                    <div className="hero-shield-icon">
+                        <Shield size={28} strokeWidth={1.5} />
+                    </div>
+
                     <div className="badge">
                         <span className="badge-pulse"></span>
                         v0.9 &middot; QUIC / HTTP/3 &middot; Rust
@@ -49,7 +53,7 @@ export default function Hero() {
                         </div>
                         <div className="feature-mini">
                             <ShieldAlert className="feature-icon text-accent" size={20} />
-                            <span>4× CR Levels</span>
+                            <span>4&times; CR Levels</span>
                         </div>
                         <div className="feature-mini">
                             <Globe2 className="feature-icon text-accent" size={20} />

@@ -99,6 +99,7 @@ export default function Features() {
                             className="feature-card"
                             variants={itemVariants}
                         >
+                            <span className="feature-number">{String(index + 1).padStart(2, '0')}</span>
                             <div className="feature-icon-wrapper">
                                 {feature.icon}
                             </div>
