@@ -608,24 +608,24 @@ HTTP/3 Probe Response Sequence:
                             <div className="wp-card">
                                 <h4 className="wp-card-title">Layer 1: Inner Tunnel MTU (Payload)</h4>
                                 <ul className="wp-bullets">
-                                    <li><strong>MTU:</strong> <span className="text-accent font-semibold">1280 Bytes</span></li>
+                                    <li><strong>MTU:</strong> <span className="text-accent font-semibold">1280 Bytes (Default, konfigurierbar via VPN_MTU)</span></li>
                                     <li><strong>Basis:</strong> RFC 8200 (IPv6) mandates that all network nodes must support forwarding IPv6 packets of at least 1280 bytes without fragmentation. This is the single lowest-common-denominator MTU that every conformant internet device must support.</li>
-                                    <li><strong>Effect on OS:</strong> The TUN interface on Windows/Android is configured with MTU 1280. The OS TCP/IP stack will never generate a packet larger than 1280 bytes destined for the tunnel.</li>
+                                    <li><strong>Effect on OS:</strong> The TUN interface on Windows/Android is configured with MTU = VPN_MTU (default 1280). The OS TCP/IP stack will never generate a packet larger than VPN_MTU bytes destined for the tunnel.</li>
                                     <li><strong>ICMP Enforcement:</strong> If an inner application attempts to send a packet larger than 1280 bytes (e.g., due to misconfiguration), the client generates a synthetic ICMP "Packet Too Big" message and injects it into the local TUN interface. The sending application receives this ICMP and reduces its packet size.</li>
                                 </ul>
                             </div>
                             <div className="wp-card">
                                 <h4 className="wp-card-title">Layer 2: Outer Tunnel MTU (Wire)</h4>
                                 <ul className="wp-bullets">
-                                    <li><strong>MTU:</strong> <span className="text-accent font-semibold">1360 Bytes (Pinned)</span></li>
+                                    <li><strong>MTU:</strong> <span className="text-accent font-semibold">VPN_MTU + 80 Bytes (Pinned, Default: 1360)</span></li>
                                     <li><strong>Configuration:</strong>
                                         <ul className="wp-sub-bullets">
                                             <li>Quinn's dynamic PMTUD is <strong>disabled</strong>: <code>mtu_discovery_config(None)</code></li>
-                                            <li>Initial MTU is forced: <code>initial_mtu(1360)</code></li>
-                                            <li>Minimum MTU is forced: <code>min_mtu(1360)</code></li>
+                                            <li>Initial MTU is forced: <code>initial_mtu(VPN_MTU + 80)</code></li>
+                                            <li>Minimum MTU is forced: <code>min_mtu(VPN_MTU + 80)</code></li>
                                         </ul>
                                     </li>
-                                    <li><strong>Effect:</strong> Quinn will never attempt to send QUIC packets larger than 1360 bytes, and will never reduce its MTU estimate below 1360 bytes regardless of probe failures. The black hole trap is avoided: there are no large packets to drop, and no MTU reduction to trigger.</li>
+                                    <li><strong>Effect:</strong> Quinn will never attempt to send QUIC packets larger than VPN_MTU+80 bytes, and will never reduce its MTU estimate below VPN_MTU+80 bytes regardless of probe failures. The black hole trap is avoided: there are no large packets to drop, and no MTU reduction to trigger.</li>
                                 </ul>
                             </div>
                         </div>
@@ -637,7 +637,7 @@ HTTP/3 Probe Response Sequence:
                         <div className="wp-math-box">
                             <div className="math-row">
                                 <span className="math-label">Outer Wire Capacity (Pinned):</span>
-                                <span className="math-value">1360 Bytes</span>
+                                <span className="math-value">VPN_MTU + 80 Bytes (Default: 1360)</span>
                             </div>
                             <div className="math-row math-minus">
                                 <span className="math-label">IPv4 Header (min, no options):</span>
@@ -679,12 +679,12 @@ HTTP/3 Probe Response Sequence:
                             </div>
                             <div className="math-divider"></div>
                             <div className="math-conclusion mt-4">
-                                <strong>Verification:</strong> 1289 ≥ 1280. <span className="text-accent font-bold">The inner 1280-byte packet always fits within the 1360-byte outer budget, with a safety margin of ~9 bytes.</span>
+                                <strong>Verification:</strong> 1289 ≥ 1280. <span className="text-accent font-bold">The inner 1280-byte packet always fits within the outer budget (VPN_MTU+80, default 1360), with a safety margin of ~9 bytes.</span>
                             </div>
                         </div>
 
                         <p className="wp-paragraph mt-4">
-                            The 1360-byte outer MTU was chosen through empirical analysis of real-world DSL, cable, and fiber residential connections. 1360 bytes fits within the effective MTU of:
+                            The default outer MTU of 1360 bytes was chosen through empirical analysis of real-world DSL, cable, and fiber residential connections. 1360 bytes fits within the effective MTU of:
                         </p>
                         <ul className="wp-bullets">
                             <li>Standard Ethernet (1500 bytes) — 140 bytes headroom.</li>
@@ -694,7 +694,7 @@ HTTP/3 Probe Response Sequence:
                         </ul>
 
                         <div className="wp-callout">
-                            <strong>Why not just use 1280 for the outer MTU too?</strong> A 1280-byte outer MTU would leave approximately 1200 bytes for payload — 80 bytes less than our inner MTU requirement. This would force IP fragmentation of the inner payload, eliminating the efficiency gain. Choosing 1360 as the outer MTU is the minimum value that (a) comfortably fits within all common residential link MTUs and (b) provides enough headroom for the full 1280-byte inner packet plus all overhead.
+                            <strong>Why not just use 1280 for the outer MTU too?</strong> A 1280-byte outer MTU would leave approximately 1200 bytes for payload — 80 bytes less than our inner MTU requirement. This would force IP fragmentation of the inner payload, eliminating the efficiency gain. Choosing VPN_MTU+80 (default 1360) as the outer MTU is the minimum value that (a) comfortably fits within all common residential link MTUs and (b) provides enough headroom for the full inner packet plus all overhead.
                         </div>
                     </section>
 
@@ -897,7 +897,7 @@ HTTP/3 Probe Response Sequence:
                                     <strong>MTU Black Hole Elimination</strong>
                                 </div>
                                 <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
-                                    The Pinned MTU strategy (outer 1360 / inner 1280) provably eliminates the PMTUD black hole failure mode for all RFC-conformant network configurations, without requiring ICMP forwarding or MSS clamping hacks.
+                                    The Pinned MTU strategy (outer VPN_MTU+80 / inner VPN_MTU) provably eliminates the PMTUD black hole failure mode for all RFC-conformant network configurations, without requiring ICMP forwarding or MSS clamping hacks.
                                 </p>
                             </div>
                             <div className="wp-card">

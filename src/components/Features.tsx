@@ -15,7 +15,7 @@ const features = [
     {
         icon: <Globe2 className="text-accent" size={32} strokeWidth={1.5} />,
         title: 'The Pinned MTU Strategy',
-        description: 'Solves "Packet Too Big" black holes. We enforce a strict 1280 Byte inner payload and a 1360 Byte outer tunnel, guaranteeing zero fragmentation globally. Now configurable via VPN_MTU (1280–1360).',
+        description: 'Solves "Packet Too Big" black holes. We enforce a strict 1280 Byte inner payload and a 1360 Byte outer tunnel (default), guaranteeing zero fragmentation globally. Now configurable via VPN_MTU (1280–1360).',
     },
     {
         icon: <Cpu className="text-accent" size={32} strokeWidth={1.5} />,

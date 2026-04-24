@@ -37,7 +37,7 @@ const faqs = [
     },
     {
         question: "What is the 'Pinned MTU' strategy?",
-        answer: "Many legacy VPNs fail on constrained networks (DS-Lite, PPPoE) because packets fragment. We enforce a strict 1280-byte inner payload and 1360-byte outer tunnel, eliminating PMTUD black holes. The MTU is now configurable via VPN_MTU (range 1280–1360) for environments that need different values."
+        answer: "Many legacy VPNs fail on constrained networks (DS-Lite, PPPoE) because packets fragment. We enforce a strict 1280-byte inner payload and 1360-byte outer tunnel (default), eliminating PMTUD black holes. The MTU is now configurable via VPN_MTU (range 1280–1360) for environments that need different values."
     }
 ];
 

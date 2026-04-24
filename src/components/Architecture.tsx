@@ -14,13 +14,13 @@ export default function Architecture() {
                             Most residential connections (DS-Lite, PPPoE) suffer from maximum transmission unit (MTU) limitations. Standard VPNs relying on 1500-byte packets inevitably cause fragmentation. Modern firewalls abhor fragments, silently dropping them into "Black Holes".
                         </p>
                         <p className="architecture-description">
-                            By enforcing a mathematically precise dual-layer MTU system - a 1280 Byte inner payload (your raw network packet) wrapped strictly in a 1360 Byte outer tunnel (including 80 Bytes of QUIC/UDP/IP overhead) - Mavi VPN bypasses Path MTU Discovery failures completely. This absolute limit guarantees zero fragmentation on standard connections.
+                            By enforcing a mathematically precise dual-layer MTU system - a 1280 Byte inner payload (your raw network packet) wrapped strictly in a VPN_MTU+80 Byte outer tunnel (default 1360B, including ~80 Bytes of QUIC/UDP/IP overhead) - Mavi VPN bypasses Path MTU Discovery failures completely. This absolute limit guarantees zero fragmentation on standard connections.
                         </p>
 
                         <div className="arch-stats">
                             <div className="stat-item">
                                 <div className="stat-value text-accent">1360<span>B</span></div>
-                                <div className="stat-label">Outer QUIC Wire</div>
+                                <div className="stat-label">Outer QUIC Wire (Default)</div>
                             </div>
                             <div className="stat-item">
                                 <div className="stat-value text-accent">1280<span>B</span></div>
@@ -36,7 +36,7 @@ export default function Architecture() {
                     <div className="architecture-visual">
                         <div className="diagram-container glass-panel">
                             <div className="diagram-layer outer-layer">
-                                <span className="layer-label">Wire Layer (Quinn) 1360B</span>
+                                <span className="layer-label">Wire Layer (Quinn) 1360B (Default)</span>
                                 <div className="diagram-layer inner-layer">
                                     <span className="layer-label text-accent">Payload (TUN) 1280B</span>
                                 </div>
