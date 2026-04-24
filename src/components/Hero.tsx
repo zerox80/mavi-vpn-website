@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShieldAlert, Zap, Globe2, ShieldCheck, Shield } from 'lucide-react';
+import { ShieldCheck, Zap, ShieldAlert, Globe2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import TerminalMockup from './TerminalMockup';
 
@@ -8,21 +8,15 @@ export default function Hero() {
         <section className="hero-section" id="home">
             <div className="container hero-container">
 
-                <div className="hero-glow"></div>
-
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                     className="hero-content"
                 >
-                    <div className="hero-shield-icon">
-                        <Shield size={28} strokeWidth={1.5} />
-                    </div>
-
                     <div className="badge">
                         <span className="badge-pulse"></span>
-                        v0.9 &middot; QUIC / HTTP/3 &middot; Rust
+                        v0.9 · QUIC / HTTP/3 · Rust
                     </div>
 
                     <h1 className="hero-title">
@@ -30,8 +24,8 @@ export default function Hero() {
                     </h1>
 
                     <p className="hero-subtitle">
-                        The next-generation cross-platform VPN engineered to defeat Deep Packet Inspection.
-                        MASQUE framing, ECH GREASE, and a Zero-Copy Rust datapath &mdash; across Windows, Linux, and Android.
+                        Next-gen cross-platform VPN engineered to defeat Deep Packet Inspection.
+                        MASQUE framing, ECH GREASE, and a Zero-Copy Rust datapath.
                     </p>
 
                     <div className="hero-actions">
@@ -45,27 +39,27 @@ export default function Hero() {
 
                     <div className="hero-features">
                         <div className="feature-mini">
-                            <ShieldCheck className="feature-icon text-accent" size={20} />
-                            <span>ECH GREASE + MASQUE</span>
+                            <ShieldCheck className="feature-icon text-accent" size={16} />
+                            <span>ECH + MASQUE</span>
                         </div>
                         <div className="feature-mini">
-                            <Zap className="feature-icon text-accent" size={20} />
-                            <span>BBR + GSO/GRO</span>
+                            <Zap className="feature-icon text-accent" size={16} />
+                            <span>BBR + GSO</span>
                         </div>
                         <div className="feature-mini">
-                            <ShieldAlert className="feature-icon text-accent" size={20} />
-                            <span>4&times; CR Levels</span>
+                            <ShieldAlert className="feature-icon text-accent" size={16} />
+                            <span>4× CR Levels</span>
                         </div>
                         <div className="feature-mini">
-                            <Globe2 className="feature-icon text-accent" size={20} />
+                            <Globe2 className="feature-icon text-accent" size={16} />
                             <span>Win / Linux / Android</span>
                         </div>
                     </div>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                        transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
                     >
                         <TerminalMockup />
                     </motion.div>
