@@ -1,4 +1,4 @@
-﻿
+
 
 import { Link } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ export default function Footer() {
                             <img src="/mavi-logo.png" alt="Mavi VPN Logo" style={{ height: '48px', width: 'auto', borderRadius: '8px' }} />
                             <span className="logo-text">Mavi<span className="logo-accent">VPN</span></span>
                         </div>
-                        <p className="footer-tagline">Engineered for absolute invisibility and uncompromised performance.</p>
+                        <p className="footer-tagline">High-performance, censorship-resistant VPN built with Rust. v0.9</p>
                     </div>
                     <div className="footer-links">
                         <div className="link-group">

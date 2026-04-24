@@ -1,36 +1,46 @@
-import { EyeOff, Cpu, Globe2, Zap, Smartphone, Key } from 'lucide-react';
+import { EyeOff, Cpu, Globe2, Zap, Smartphone, Key, ShieldCheck, Network } from 'lucide-react';
 import { motion, type Variants } from 'framer-motion';
 
 const features = [
     {
         icon: <EyeOff className="text-accent" size={32} strokeWidth={1.5} />,
         title: 'Censorship Resistance',
-        description: 'Bypass strict firewalls (GFW, Corporate). Mavi VPN uses ALPN h3 masquerading and actively deflects DPI scanners by simulating a legitimate HTTP/3 Web-Server.',
+        description: 'Four progressive obfuscation levels: ALPN h3 masquerading, active probe resistance with Nginx simulation, MASQUE/RFC 9484 capsule framing, and ECH GREASE with SNI spoofing. Indistinguishable from browser traffic.',
+    },
+    {
+        icon: <ShieldCheck className="text-accent" size={32} strokeWidth={1.5} />,
+        title: 'Encrypted Client Hello',
+        description: 'ECH GREASE with X25519/HPKE (RFC 9180) spoofs the SNI extension during TLS handshakes. DPI systems cannot determine the true destination, even from passive inspection of the ClientHello.',
     },
     {
         icon: <Globe2 className="text-accent" size={32} strokeWidth={1.5} />,
         title: 'The Pinned MTU Strategy',
-        description: 'Solves "Packet Too Big" black holes. We enforce a strict 1280 Byte inner payload and a 1360 Byte outer tunnel, guaranteeing zero fragmentation globally.',
+        description: 'Solves "Packet Too Big" black holes. We enforce a strict 1280 Byte inner payload and a 1360 Byte outer tunnel, guaranteeing zero fragmentation globally. Now configurable via VPN_MTU (1280–1360).',
     },
     {
         icon: <Cpu className="text-accent" size={32} strokeWidth={1.5} />,
         title: 'Zero-Copy Rust Core',
-        description: 'Engineered entirely in Rust. Packets flow from the bare-metal TUN interface directly into the QUIC channel without memory cloning for maximum throughput.',
+        description: 'Engineered entirely in Rust with GSO/GRO offloading, BBR congestion control, mimalloc allocator, and 4 MB UDP buffers. Packets flow from TUN to QUIC without memory cloning.',
     },
     {
         icon: <Smartphone className="text-accent" size={32} strokeWidth={1.5} />,
         title: 'Cross-Platform Natives',
-        description: 'Built natively for your hardware. High-performance Windows client using WinTUN, and a sleek Android application utilizing Kotlin Jetpack Compose and our Rust JNI Core.',
+        description: 'Windows (WinTUN), Linux (TUN + systemd), and Android (Kotlin Compose + Rust JNI). Tauri v2 GUI with system tray. MSI, NSIS, DEB, RPM, AppImage installers.',
+    },
+    {
+        icon: <Network className="text-accent" size={32} strokeWidth={1.5} />,
+        title: 'Dual-Stack & DNS Isolation',
+        description: 'Full IPv4 + IPv6 support with NAT66 via ip6tables. NRPT rules on Windows and per-tunnel DNS on Linux/Android prevent DNS leaks outside the tunnel.',
     },
     {
         icon: <Key className="text-accent" size={32} strokeWidth={1.5} />,
         title: 'Enterprise Identity',
-        description: 'Ready for corporate deployments with Keycloak OIDC integration. Centralize user management, enforce MFA, and maintain perfect access control.',
+        description: 'Keycloak OIDC with PKCE, JWT validation, JWKS rotation, and browser-based SSO. CSRF protection on the OAuth flow. Centralized access control for corporate deployments.',
     },
     {
         icon: <Zap className="text-accent" size={32} strokeWidth={1.5} />,
         title: 'Seamless Roaming',
-        description: 'Experience network transitions without dropping the tunnel. Our QUIC connection migration strategy seamlessly shifts your connection between Wi-Fi and 5G.',
+        description: 'QUIC connection migration seamlessly shifts your connection between Wi-Fi and 5G. Per-app split tunneling on Android. No handshake restart on IP change.',
     }
 ];
 
@@ -55,7 +65,7 @@ export default function Features() {
             <div className="container">
 
                 <div className="section-header text-center">
-                    <motion.h2 
+                    <motion.h2
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -64,7 +74,7 @@ export default function Features() {
                     >
                         Engineered for Hostile Networks.
                     </motion.h2>
-                    <motion.p 
+                    <motion.p
                         initial={{ opacity: 0, y: 10 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
@@ -72,7 +82,7 @@ export default function Features() {
                         className="section-subtitle"
                     >
                         Not just another wrapper around WireGuard. Mavi VPN is a ground-up QUIC implementation
-                        designed to survive where legacy protocols are aggressively throttled or blocked.
+                        with progressive censorship resistance, zero-copy datapath, and cross-platform support for Windows, Linux, and Android.
                     </motion.p>
                 </div>
 
@@ -86,10 +96,8 @@ export default function Features() {
                     {features.map((feature, index) => (
                         <motion.div
                             key={index}
-                            className="feature-card glass-panel"
+                            className="feature-card"
                             variants={itemVariants}
-                            whileHover={{ y: -5, boxShadow: 'var(--shadow-xl)', borderColor: 'rgba(37, 99, 235, 0.3)' }}
-                            style={{ opacity: 1, animation: 'none' }} /* Overriding legacy CSS animation */
                         >
                             <div className="feature-icon-wrapper">
                                 {feature.icon}

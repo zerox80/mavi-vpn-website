@@ -11,7 +11,7 @@ export default function Home() {
             <section className="container text-center" style={{ paddingBottom: 'var(--spacing-xl)' }}>
                 <h3 className="section-title" style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>Want to look under the hood?</h3>
                 <p className="section-subtitle" style={{ marginBottom: '1.5rem', maxWidth: '600px', marginInline: 'auto' }}>
-                    Discover how our Pinned MTU engine and QUIC Zero-Copy datapath achieve high-speed censorship resistance.
+                    Explore MASQUE framing, ECH GREASE, the Pinned MTU engine, and the QUIC Zero-Copy datapath in our technical deep dive.
                 </p>
                 <a href="/technology" className="btn-secondary">
                     Read Technical Deep Dive

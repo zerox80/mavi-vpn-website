@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ShieldAlert, Zap, Globe2 } from 'lucide-react';
+import { ShieldAlert, Zap, Globe2, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function Hero() {
@@ -7,10 +7,9 @@ export default function Hero() {
         <section className="hero-section" id="home">
             <div className="container hero-container">
 
-                {/* Abstract Background Element (CSS based) */}
                 <div className="hero-glow"></div>
 
-                <motion.div 
+                <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
@@ -18,7 +17,7 @@ export default function Hero() {
                 >
                     <div className="badge">
                         <span className="badge-pulse"></span>
-                        Protocol: QUIC / UDP
+                        v0.9 &middot; QUIC / HTTP/3 &middot; Rust
                     </div>
 
                     <h1 className="hero-title">
@@ -27,7 +26,7 @@ export default function Hero() {
 
                     <p className="hero-subtitle">
                         The next-generation cross-platform VPN engineered to defeat Deep Packet Inspection.
-                        Powered by HTTP/3 masquerading and a Zero-Copy Rust datapath.
+                        MASQUE framing, ECH GREASE, and a Zero-Copy Rust datapath &mdash; across Windows, Linux, and Android.
                     </p>
 
                     <div className="hero-actions">
@@ -41,16 +40,20 @@ export default function Hero() {
 
                     <div className="hero-features">
                         <div className="feature-mini">
+                            <ShieldCheck className="feature-icon text-accent" size={20} />
+                            <span>ECH GREASE + MASQUE</span>
+                        </div>
+                        <div className="feature-mini">
                             <Zap className="feature-icon text-accent" size={20} />
-                            <span>BBR Congestion Control</span>
+                            <span>BBR + GSO/GRO</span>
                         </div>
                         <div className="feature-mini">
                             <ShieldAlert className="feature-icon text-accent" size={20} />
-                            <span>CR Mode (Anti-Censorship)</span>
+                            <span>4× CR Levels</span>
                         </div>
                         <div className="feature-mini">
                             <Globe2 className="feature-icon text-accent" size={20} />
-                            <span>Seamless Mobile Roaming</span>
+                            <span>Win / Linux / Android</span>
                         </div>
                     </div>
                 </motion.div>

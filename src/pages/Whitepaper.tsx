@@ -21,10 +21,10 @@ export default function Whitepaper() {
                         </p>
                         <div className="whitepaper-meta animate-fade-in" style={{ animationDelay: '300ms' }}>
                             <span>By: Mavi Dev Team</span>
-                            <span className="meta-divider">•</span>
-                            <span>Updated: 2026</span>
-                            <span className="meta-divider">•</span>
-                            <span>Version: 2.0</span>
+                            <span className="meta-divider">&bull;</span>
+                            <span>Updated: April 2026</span>
+                            <span className="meta-divider">&bull;</span>
+                            <span>Version: 3.0 &middot; Tag 0.9</span>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@ export default function Whitepaper() {
                 <section className="glass-panel whitepaper-abstract animate-fade-in" style={{ animationDelay: '400ms' }}>
                     <h2 className="abstract-title">Abstract</h2>
                     <p>
-                        This document provides a comprehensive technical specification of Mavi VPN — a high-performance, censorship-resistant Virtual Private Network built atop the IETF QUIC protocol (RFC 9000). We examine in rigorous detail the motivations behind each architectural decision, the cryptographic guarantees of the security model, the mechanics of deep packet inspection (DPI) evasion through ALPN masquerading and active-probe resistance, and the network engineering rationale behind the novel <strong>"Pinned MTU"</strong> strategy. This strategy eliminates the class of failures caused by Path MTU Discovery (PMTUD) Black Holes — a pathological condition endemic to modern residential networks using DS-Lite, PPPoE, and carrier-grade NAT (CGNAT). The reader is assumed to have working knowledge of TCP/IP networking, TLS, and basic cryptography.
+                        This document provides a comprehensive technical specification of Mavi VPN — a high-performance, censorship-resistant Virtual Private Network built atop the IETF QUIC protocol (RFC 9000). We examine in rigorous detail the motivations behind each architectural decision, the cryptographic guarantees of the security model, the mechanics of deep packet inspection (DPI) evasion through ALPN masquerading, MASQUE/RFC 9484 capsule framing, Encrypted Client Hello (ECH GREASE), and active-probe resistance. We also detail the network engineering rationale behind the novel <strong>"Pinned MTU"</strong> strategy, which eliminates PMTUD Black Holes, and the cross-platform implementation spanning Windows, Linux, and Android. The reader is assumed to have working knowledge of TCP/IP networking, TLS, and basic cryptography.
                     </p>
                 </section>
 
@@ -105,7 +105,7 @@ export default function Whitepaper() {
                             <li>
                                 <div className="wp-list-icon"><Smartphone size={18} /></div>
                                 <div className="wp-list-content">
-                                    <strong>Platform Support:</strong> Native, high-performance implementations for Windows (Rust + WinTUN kernel driver) and Android (Kotlin UI layer + Rust core via JNI), sharing a common <code>shared</code> crate for protocol consistency.
+                                    <strong>Platform Support:</strong> Native, high-performance implementations for Windows (Rust + WinTUN kernel driver), Linux (TUN via /dev/net/tun + systemd daemon), and Android (Kotlin UI layer + Rust core via JNI), sharing a common <code>shared</code> crate for protocol consistency. Tauri v2 GUI for cross-platform desktop.
                                 </div>
                             </li>
                         </ul>
@@ -213,39 +213,26 @@ export default function Whitepaper() {
 │  │  └──────┬───────┘   │      │  └──────────┬─────────────┘  │  │
 │  └─────────┼───────────┘      └─────────────┼────────────────┘  │
 │            │                                │                    │
-│            └──────────┬──────────────────────┘                   │
+│  ┌─────────────────────┐      ┌──────────────────────────────┐  │
+│  │   Linux Client      │      │   Tauri v2 GUI               │  │
+│  │                     │      │   (Windows + Linux)          │  │
+│  │  ┌──────────────┐   │      │                              │  │
+│  │  │ Rust Binary  │   │      │  ┌────────────────────────┐  │  │
+│  │  │ (Tokio async)│   │      │  │ HTML/CSS/JS frontend   │  │  │
+│  │  └──────┬───────┘   │      │  │ Rust backend (Tauri)   │  │  │
+│  │         │ /dev/net/  │      │  └────────────────────────┘  │  │
+│  │  ┌──────▼───────┐   │      └──────────────────────────────┘  │
+│  │  │ Linux TUN    │   │                                        │
+│  │  │ (Layer 3)    │   │                                        │
+│  │  └──────┬───────┘   │                                        │
+│  └─────────┼───────────┘                                        │
+│            └──────────┬──────────────────────┐                   │
 │                       │ QUIC/UDP (DATAGRAM frames)               │
 │                       │ ALPN: "h3" (CR Mode) / "mavivpn"        │
 │                       │ TLS 1.3 mandatory                        │
-└───────────────────────┼─────────────────────────────────────────┘
-                        │
-                        │  Internet / Hostile Network
-                        │  (DPI, firewalls, CGNAT, DS-Lite)
-                        │
-┌───────────────────────┼─────────────────────────────────────────┐
-│                       │          SERVER SIDE                     │
-│              ┌────────▼──────────────────┐                      │
-│              │     Mavi VPN Server       │                      │
-│              │     (Rust + Tokio)        │                      │
-│              │                           │                      │
-│              │  ┌─────────────────────┐  │                      │
-│              │  │  quinn QUIC stack   │  │                      │
-│              │  │  (BBR congestion    │  │                      │
-│              │  │   control, GSO)     │  │                      │
-│              │  └─────────┬───────────┘  │                      │
-│              │            │              │                      │
-│              │  ┌─────────▼───────────┐  │                      │
-│              │  │  Linux TUN/TAP      │  │                      │
-│              │  │  (kernel network    │  │                      │
-│              │  │   interface)        │  │                      │
-│              │  └─────────────────────┘  │                      │
-│              └───────────────────────────┘                      │
-│                        │                                        │
-│              ┌──────────▼────────────────┐                      │
-│              │    Internet Gateway       │                      │
-│              │    (NAT, Routing)         │                      │
-│              └───────────────────────────┘                      │
-└─────────────────────────────────────────────────────────────────┘`}
+│                       │ MASQUE connect-ip (optional)             │
+│                       │ ECH GREASE (optional)                    │
+└───────────────────────┼─────────────────────────────────────────┘`}
                             </pre>
                         </div>
 
@@ -534,6 +521,27 @@ HTTP/3 Probe Response Sequence:
                             <li><strong>Variable-rate Keepalive:</strong> Keepalive intervals are randomized within a configurable range rather than using a fixed period, preventing timing analysis.</li>
                             <li><strong>Datagram packing:</strong> Small packets from the inner tunnel can be coalesced into a single QUIC datagram (within MTU bounds) to reduce the total datagram count and make traffic statistics resemble bulk file transfer.</li>
                         </ul>
+
+                        <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text-primary)' }}>5.4.4 MASQUE / RFC 9484 Capsule Framing</h4>
+                        <p className="wp-paragraph">
+                            MASQUE (Multipurpose Application Service Extension, RFC 9484) provides an additional layer of obfuscation by tunneling IP packets inside HTTP/3 CONNECT-IP capsule frames. When enabled (<code>http3_framing: true</code>), all tunneled IP packets are wrapped in standards-compliant HTTP/3 capsule framing.
+                        </p>
+                        <p className="wp-paragraph">
+                            DPI systems that parse QUIC frames see only legitimate HTTP/3 proxy traffic. The capsule framing adds a second layer of indirection beyond ALPN masquerading — even if a firewall identifies the connection as HTTP/3, the payload structure matches a standard CONNECT-IP proxy rather than a custom VPN protocol. This is the highest standard censorship resistance level before adding ECH.
+                        </p>
+
+                        <h4 style={{ fontSize: '1rem', fontWeight: 700, marginBottom: '0.75rem', color: 'var(--text-primary)' }}>5.4.5 Encrypted Client Hello (ECH GREASE)</h4>
+                        <p className="wp-paragraph">
+                            The TLS Server Name Indication (SNI) extension reveals the destination hostname in plaintext during every TLS handshake. DPI systems use this to block connections to specific domains. Mavi VPN implements ECH GREASE (RFC 9180) to encrypt the real SNI using Hybrid Public Key Encryption (HPKE) with X25519 key exchange.
+                        </p>
+                        <p className="wp-paragraph">
+                            The real destination hostname is hidden inside an encrypted TLS extension, while a decoy SNI (e.g., <code>cloudflare-ech.com</code>) is visible to passive observers. The server uses its private key to decrypt the inner ClientHello and establish the true connection. Combined with MASQUE framing and ALPN h3 masquerading, the connection is indistinguishable from a browser using Encrypted Client Hello to visit a website through an HTTP/3 CONNECT-IP proxy.
+                        </p>
+                        <div className="wp-callout">
+                            <strong>Defense in Depth:</strong> ECH + MASQUE + ALPN h3 provides three independent layers of censorship resistance.
+                            Each layer targets a different DPI analysis technique: ALPN masquerading defeats protocol identification,
+                            MASQUE framing defeats payload analysis, and ECH defeats SNI-based domain blocking.
+                        </div>
                     </section>
 
                     {/* 6. MTU Strategy */}
@@ -775,8 +783,30 @@ HTTP/3 Probe Response Sequence:
 
                                 <ul className="wp-bullets">
                                     <li><strong>Always-On VPN:</strong> Supports Android's "Always-On VPN" and "Block connections without VPN" (kill switch) settings via <code>VpnService</code>.</li>
-                                    <li><strong>Split Tunneling:</strong> Configurable route exclusions allow specific apps or IPs to bypass the tunnel (e.g., streaming apps that geo-restrict content by server IP).</li>
+                                    <li><strong>Split Tunneling:</strong> Configurable per-app route exclusions allow specific apps to bypass the tunnel (e.g., streaming apps that geo-restrict content by server IP).</li>
                                     <li><strong>Connection Resilience:</strong> QUIC connection migration handles Wi-Fi ↔ LTE handoffs without VPN reconnection. The Kotlin layer monitors network capability changes via <code>ConnectivityManager.NetworkCallback</code> and triggers a migration hint to the Rust core.</li>
+                                </ul>
+                            </div>
+
+                            <div className="wp-implementation-card">
+                                <div className="impl-icon"><Globe size={24} /></div>
+                                <h3 className="wp-heading-3">Linux Client (<code>linux</code> crate)</h3>
+
+                                <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>TUN via /dev/net/tun</h4>
+                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
+                                    The Linux client creates a TUN interface via <code>/dev/net/tun</code> using the kernel's Universal TUN/TAP driver. Like the Windows client, it operates at Layer 3 (IP packets). The client runs as a systemd daemon for automatic startup and service management, with socket activation support.
+                                </p>
+
+                                <h4 style={{ fontSize: '0.95rem', fontWeight: 700, marginBottom: '0.5rem', color: 'var(--text-primary)' }}>Systemd Integration</h4>
+                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.75rem' }}>
+                                    The Linux client integrates with systemd for service management, IPC via D-Bus, and structured logging via journald. Configuration is managed through environment files (<code>/etc/mavi-vpn/env</code>) and the systemd unit file, supporting both token-based and Keycloak OIDC authentication.
+                                </p>
+
+                                <ul className="wp-bullets">
+                                    <li><strong>Network Configuration:</strong> IP addresses, routes, and DNS are configured via <code>ip addr</code>, <code>ip route</code>, and <code>resolvectl</code> for seamless integration with systemd-resolved.</li>
+                                    <li><strong>Dual-Stack:</strong> Full IPv4 + IPv6 support with per-tunnel DNS isolation to prevent DNS leaks on both stacks.</li>
+                                    <li><strong>ICMP Enforcement:</strong> Same Packet-Too-Big injection as the Windows and Android clients, synthesizing ICMP messages to enforce the Pinned MTU boundary.</li>
+                                    <li><strong>Tauri v2 GUI:</strong> An optional graphical frontend built with Tauri v2 (HTML/CSS/JS + Rust backend) provides a desktop GUI with system tray integration on both Linux and Windows.</li>
                                 </ul>
                             </div>
                         </div>
@@ -896,13 +926,16 @@ HTTP/3 Probe Response Sequence:
                                 <strong>iOS Client:</strong> Implementing a Network Extension (PacketTunnelProvider) client using the same Rust core compiled for Apple Silicon (aarch64-apple-ios) via Swift/Rust FFI.
                             </li>
                             <li>
+                                <strong>Socket Sharding:</strong> <code>SO_REUSEPORT</code> for multi-core UDP scaling, allowing multiple Tokio runtimes to receive datagrams on the same port for improved throughput on multi-NIC servers.
+                            </li>
+                            <li>
+                                <strong>eBPF Data Plane:</strong> Kernel-level packet routing using eBPF/XDP for zero-copy efficiency, bypassing the userspace TUN interface entirely for server-side forwarding.
+                            </li>
+                            <li>
+                                <strong>Server-side ECH:</strong> Full ECH decryption on the server side when rustls adds native support, enabling proper certificate selection based on the decrypted inner SNI.
+                            </li>
+                            <li>
                                 <strong>Multi-path QUIC:</strong> QUIC's connection migration infrastructure can be extended to simultaneously use multiple network paths (Wi-Fi + cellular) for increased redundancy and throughput — a feature standardized as QUIC multipath (RFC 9369 working group).
-                            </li>
-                            <li>
-                                <strong>Obfuscation Layer:</strong> For the most restrictive censorship environments, adding a pluggable obfuscation layer (similar to Tor's pluggable transports) that modifies QUIC packet timing and size distributions to match a specific target traffic profile.
-                            </li>
-                            <li>
-                                <strong>Domain Fronting Integration:</strong> Routing the initial QUIC handshake through a CDN that supports CONNECT-UDP (RFC 9298) to further hide the true destination of the VPN connection.
                             </li>
                         </ul>
 
@@ -912,6 +945,8 @@ HTTP/3 Probe Response Sequence:
                             <li>RFC 9001 — Using TLS to Secure QUIC</li>
                             <li>RFC 9221 — An Unreliable Datagram Extension to QUIC</li>
                             <li>RFC 9204 — QPACK: Field Compression for HTTP/3</li>
+                            <li>RFC 9484 — Proxying IP in HTTP (MASQUE connect-ip)</li>
+                            <li>RFC 9180 — Hybrid Public Key Encryption (HPKE)</li>
                             <li>RFC 8899 — Datagram Packetization Layer Path MTU Discovery</li>
                             <li>RFC 8200 — Internet Protocol, Version 6 (IPv6) Specification</li>
                             <li>RFC 6333 — Dual-Stack Lite Broadband Deployments Following IPv4 Exhaustion</li>
