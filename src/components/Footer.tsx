@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Github, ArrowUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
+import { GitHub } from './icons/GitHub';
 
 export default function Footer() {
     const scrollToTop = () => {
@@ -18,7 +19,7 @@ export default function Footer() {
                         <p className="footer-tagline">High-performance, censorship-resistant VPN built with Rust.</p>
                         <div className="footer-social">
                             <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="GitHub">
-                                <Github size={16} />
+                                <GitHub size={16} />
                             </a>
                         </div>
                     </div>
