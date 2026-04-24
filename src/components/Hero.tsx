@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ShieldAlert, Zap, Globe2, ShieldCheck, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
+import TerminalMockup from './TerminalMockup';
 
 export default function Hero() {
     return (
@@ -60,6 +61,14 @@ export default function Hero() {
                             <span>Win / Linux / Android</span>
                         </div>
                     </div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+                    >
+                        <TerminalMockup />
+                    </motion.div>
                 </motion.div>
 
             </div>
