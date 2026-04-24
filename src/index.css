@@ -1,23 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap');
 
 :root {
-  --bg-primary: #f5f0e6;
-  --bg-secondary: #ece5d7;
-  --bg-tertiary: #e0d7c5;
-  --bg-card: #faf6ee;
+  --bg-primary: #08080a;
+  --bg-secondary: #111116;
+  --bg-tertiary: #181820;
+  --bg-card: #0f0f13;
 
-  --text-primary: #2c2518;
-  --text-secondary: #6b6050;
-  --text-tertiary: #9a8e7a;
+  --text-primary: #ffffff;
+  --text-secondary: #a1a1aa;
+  --text-tertiary: #71717a;
 
-  --accent-base: #2d5be3;
-  --accent-hover: #1e4ad4;
-  --accent-warm: #c8793e;
-  --accent-glow: rgba(45, 91, 227, 0.10);
-  --accent-warm-glow: rgba(200, 121, 62, 0.10);
+  --accent-base: #3b82f6;
+  --accent-hover: #2563eb;
+  --accent-warm: #8b5cf6;
+  --accent-glow: rgba(59, 130, 246, 0.15);
+  --accent-warm-glow: rgba(139, 92, 246, 0.15);
 
-  --border-light: #d9cdb5;
-  --border-card: #cfc2a8;
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-card: rgba(255, 255, 255, 0.05);
 
   --spacing-xs: clamp(0.25rem, 0.5vw, 0.5rem);
   --spacing-sm: clamp(0.5rem, 1vw, 1rem);
@@ -25,13 +25,13 @@
   --spacing-lg: clamp(1.5rem, 3vw, 2.5rem);
   --spacing-xl: clamp(2.5rem, 5vw, 4rem);
 
-  --shadow-sm: 0 1px 3px rgba(44,37,24,0.04), 0 4px 12px rgba(44,37,24,0.03);
-  --shadow-md: 0 2px 8px rgba(44,37,24,0.05), 0 8px 24px rgba(44,37,24,0.05);
-  --shadow-lg: 0 4px 16px rgba(44,37,24,0.06), 0 16px 48px rgba(44,37,24,0.06);
-  --shadow-xl: 0 8px 32px rgba(44,37,24,0.07), 0 24px 64px rgba(44,37,24,0.08);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.5), 0 4px 12px rgba(0,0,0,0.3);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.6), 0 8px 24px rgba(0,0,0,0.4);
+  --shadow-lg: 0 4px 16px rgba(0,0,0,0.7), 0 16px 48px rgba(0,0,0,0.5);
+  --shadow-xl: 0 8px 32px rgba(0,0,0,0.8), 0 24px 64px rgba(0,0,0,0.6);
 
-  --glass-bg: rgba(245, 240, 230, 0.80);
-  --glass-border: rgba(255, 255, 250, 0.65);
+  --glass-bg: rgba(15, 15, 19, 0.70);
+  --glass-border: rgba(255, 255, 255, 0.08);
   --glass-blur: blur(16px);
 
   --radius-sm: 6px;
@@ -109,7 +109,7 @@ body::before {
   height: 600px;
   top: -10%;
   left: 10%;
-  background: radial-gradient(circle, rgba(200, 160, 80, 0.10) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
   animation: aurora-drift-1 25s ease-in-out infinite;
 }
 
@@ -118,7 +118,7 @@ body::before {
   height: 500px;
   top: 20%;
   right: -5%;
-  background: radial-gradient(circle, rgba(180, 140, 70, 0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);
   animation: aurora-drift-2 30s ease-in-out infinite;
 }
 
@@ -127,7 +127,7 @@ body::before {
   height: 450px;
   bottom: 10%;
   left: 30%;
-  background: radial-gradient(circle, rgba(200, 121, 62, 0.07) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, transparent 70%);
   animation: aurora-drift-3 20s ease-in-out infinite;
 }
 
@@ -136,7 +136,7 @@ body::before {
   height: 350px;
   top: 50%;
   left: -5%;
-  background: radial-gradient(circle, rgba(45, 91, 227, 0.04) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.05) 0%, transparent 70%);
   animation: aurora-drift-4 35s ease-in-out infinite;
 }
 
@@ -427,7 +427,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 90vw;
   max-width: 1000px;
   max-height: 1000px;
-  background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(200, 160, 80, 0.10) 0%, rgba(200, 121, 62, 0.05) 40%, transparent 70%);
+  background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(59, 130, 246, 0.12) 0%, rgba(139, 92, 246, 0.08) 40%, transparent 70%);
   z-index: -1;
   pointer-events: none;
   animation: float 12s ease-in-out infinite;
@@ -1455,14 +1455,23 @@ p code, li code {
 /* --- Feature Number --- */
 .feature-number {
   position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-md);
+  top: 0;
+  right: 0;
   font-family: var(--font-display);
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 8rem;
+  font-weight: 800;
   color: var(--text-tertiary);
-  opacity: 0.5;
-  letter-spacing: 0.05em;
+  opacity: 0.03;
+  line-height: 1;
+  transform: translate(15%, -15%);
+  user-select: none;
+  pointer-events: none;
+  transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.feature-card:hover .feature-number {
+  opacity: 0.06;
+  transform: translate(10%, -10%);
 }
 
 /* --- CTA Section --- */
