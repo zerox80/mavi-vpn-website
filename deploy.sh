@@ -6,21 +6,20 @@ WEB_DIR="/var/www/mavi-vpn"
 
 echo "🚀 Deploying Mavi VPN Website..."
 
-# Pull latest changes
 echo "📥 Resetting, cleaning and pulling..."
 cd "$REPO_DIR"
 git reset --hard
 git clean -fd
 git pull
 
-# Install dependencies & build
 echo "📦 Installing dependencies..."
 npm install --include=optional --legacy-peer-deps
+
 echo "🔨 Building..."
 npm run build
 
-# Deploy to web root
 echo "🧹 Cleaning old deployment..."
+sudo mkdir -p "$WEB_DIR"
 sudo rm -rf "$WEB_DIR"/*
 
 echo "📂 Copying new build..."
