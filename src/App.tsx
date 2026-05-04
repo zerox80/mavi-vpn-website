@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import AnimatedBackground from './components/AnimatedBackground';
 
 // Pages
 import Home from './pages/Home';
@@ -10,8 +9,7 @@ import Whitepaper from './pages/Whitepaper';
 
 function App() {
   return (
-    <div className="app-container">
-      <AnimatedBackground />
+    <div className="app-container" id="top">
       <Navbar />
       <main>
         <Routes>

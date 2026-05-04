@@ -1,51 +1,43 @@
 import { Link } from 'react-router-dom';
-import { ArrowUp } from 'lucide-react';
-import { GitHub } from './icons/GitHub';
 
 export default function Footer() {
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
     return (
         <footer className="footer">
-            <div className="container">
-                <div className="footer-content">
-                    <div className="footer-brand">
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
-                            <img src="/mavi-logo.png" alt="Mavi VPN Logo" style={{ height: '40px', width: 'auto', borderRadius: '8px' }} />
-                            <span className="logo-text">Mavi<span className="logo-accent">VPN</span></span>
-                        </div>
-                        <p className="footer-tagline">High-performance, censorship-resistant VPN built with Rust.</p>
-                        <div className="footer-social">
-                            <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="footer-social-link" aria-label="GitHub">
-                                <GitHub size={16} />
-                            </a>
-                        </div>
+            <div className="footer-grid">
+                <div>
+                    <Link to="/" className="brand footer-brand" aria-label="Mavi VPN home">
+                        <span className="brand-mark" aria-hidden="true">
+                            <img src="/mavi-logo.png" alt="" />
+                        </span>
+                        <span>Mavi VPN</span>
+                    </Link>
+                    <p className="footer-tagline">
+                        High-performance, censorship-resistant VPN built on QUIC, MASQUE, ECH, and Rust.
+                    </p>
+                </div>
+
+                <div className="footer-links">
+                    <div className="link-group">
+                        <h4 className="link-title">Product</h4>
+                        <Link to="/" className="footer-link">Home</Link>
+                        <Link to="/technology" className="footer-link">Technology</Link>
+                        <Link to="/whitepaper" className="footer-link">Whitepaper</Link>
                     </div>
-                    <div className="footer-links">
-                        <div className="link-group">
-                            <h4 className="link-title">Product</h4>
-                            <Link to="/" className="footer-link">Home</Link>
-                            <Link to="/technology" className="footer-link">Technology</Link>
-                            <Link to="/whitepaper" className="footer-link">Whitepaper</Link>
-                            <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="footer-link">GitHub Repo</a>
-                        </div>
-                        <div className="link-group">
-                            <h4 className="link-title">Legal</h4>
-                            <a href="#" className="footer-link">Privacy Policy</a>
-                            <a href="#" className="footer-link">Terms of Service</a>
-                        </div>
+                    <div className="link-group">
+                        <h4 className="link-title">Project</h4>
+                        <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="footer-link">
+                            GitHub Repo
+                        </a>
+                        <a href="https://github.com/zerox80/mavi-vpn/issues" target="_blank" rel="noopener noreferrer" className="footer-link">
+                            Issues
+                        </a>
                     </div>
                 </div>
-                <div className="footer-bottom">
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
-                        <p>&copy; {new Date().getFullYear()} Mavi Dev Team.</p>
-                        <button className="footer-back-top" onClick={scrollToTop}>
-                            Back to top <ArrowUp size={12} />
-                        </button>
-                    </div>
-                </div>
+            </div>
+
+            <div className="footer-bottom">
+                <p>&copy; {new Date().getFullYear()} Mavi Dev Team.</p>
+                <a href="#top">Back to top</a>
             </div>
         </footer>
     );
