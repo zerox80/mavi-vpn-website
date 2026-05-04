@@ -15,8 +15,7 @@ git pull
 
 # Install dependencies & build
 echo "📦 Installing dependencies..."
-npm ci --legacy-peer-deps
-
+npm install --include=optional --legacy-peer-deps
 echo "🔨 Building..."
 npm run build
 
