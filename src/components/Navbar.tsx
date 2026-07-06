@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { GitHub } from './icons/GitHub';
 
 export default function Navbar() {
     return (
@@ -20,7 +21,8 @@ export default function Navbar() {
             </nav>
 
             <div className="nav-actions">
-                <a className="button button-compact" href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer">
+                <a className="button button-compact icon-link" href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer">
+                    <GitHub size={14} />
                     Source
                 </a>
             </div>

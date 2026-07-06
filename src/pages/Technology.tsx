@@ -23,6 +23,7 @@ export default function Technology() {
             <Architecture />
 
             <section className="container tech-section">
+                <p className="eyebrow">Censorship resistance</p>
                 <h2 className="section-title tech-section-header">Censorship Resistance Levels</h2>
                 <div className="cr-table-wrapper">
                     <p className="cr-table-description">
@@ -57,6 +58,7 @@ export default function Technology() {
             </section>
 
             <section className="container tech-section">
+                <p className="eyebrow">0-RTT & masquerading</p>
                 <h2 className="section-title tech-section-header">QUIC 0-RTT & ALPN Masquerading</h2>
                 <div className="tech-glass-grid">
                     <div>
@@ -77,6 +79,7 @@ export default function Technology() {
             </section>
 
             <section className="container tech-section">
+                <p className="eyebrow">MASQUE</p>
                 <h2 className="section-title tech-section-header">MASQUE / RFC 9484</h2>
                 <div className="tech-glass">
                     <h3 className="tech-subtitle">HTTP/3 Capsule Framing</h3>
@@ -97,6 +100,7 @@ export default function Technology() {
             </section>
 
             <section className="container tech-section">
+                <p className="eyebrow">ECH</p>
                 <h2 className="section-title tech-section-header">Encrypted Client Hello (ECH)</h2>
                 <div className="tech-glass">
                     <h3 className="tech-subtitle">SNI Spoofing via X25519/HPKE</h3>
@@ -114,6 +118,7 @@ export default function Technology() {
             </section>
 
             <section className="container tech-section">
+                <p className="eyebrow">Datapath</p>
                 <h2 className="section-title tech-section-header">Zero-Copy Datapath in Rust</h2>
                 <div className="tech-glass">
                     <p className="tech-text">
@@ -133,6 +138,7 @@ export default function Technology() {
             </section>
 
             <section className="container tech-section">
+                <p className="eyebrow">Roaming</p>
                 <h2 className="section-title tech-section-header">Seamless Roaming</h2>
                 <div className="tech-glass">
                     <h3 className="tech-subtitle">QUIC Connection Migration</h3>
@@ -146,6 +152,7 @@ export default function Technology() {
             </section>
 
             <section className="container tech-section">
+                <p className="eyebrow">Dual-stack & DNS</p>
                 <h2 className="section-title tech-section-header">Dual-Stack & DNS Isolation</h2>
                 <div className="tech-glass">
                     <h3 className="tech-subtitle">IPv4 + IPv6 with Leak Prevention</h3>
@@ -157,6 +164,7 @@ export default function Technology() {
             </section>
 
             <section className="container tech-section">
+                <p className="eyebrow">Access control</p>
                 <h2 className="section-title tech-section-header">Enterprise Access Control</h2>
                 <div className="tech-glass">
                     <h3 className="tech-subtitle">Keycloak OIDC Integration</h3>

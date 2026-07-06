@@ -419,7 +419,7 @@ QUIC DATAGRAM Frame:
 
                     <section className="wp-section" id="conclusion">
                         <h2 className="wp-heading-2">9. Conclusion & Future Work</h2>
-                        <div style={{ padding: '1.5rem', borderLeft: '3px solid var(--accent)', background: 'rgba(59,130,246,0.04)', borderRadius: '0 var(--radius-md) var(--radius-md) 0', marginBottom: '2rem' }}>
+                        <div style={{ padding: '1.5rem', borderLeft: '3px solid var(--accent)', background: 'color-mix(in oklch, var(--accent) 6%, var(--surface))', borderRadius: '0 var(--radius-md) var(--radius-md) 0', marginBottom: '2rem' }}>
                             <p className="wp-paragraph mb-0" style={{ fontSize: '1rem', fontWeight: 500 }}>
                                 Mavi VPN demonstrates that censorship resistance, high performance, and network robustness can coexist. By leveraging QUIC's native encryption, the Pinned MTU strategy, and standards-compliant HTTP/3 probe resistance, Mavi VPN fills a genuine gap in the VPN ecosystem.
                             </p>

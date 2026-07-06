@@ -22,8 +22,8 @@ export default function ZeroCopySvg() {
                     <stop offset="100%" stopColor="#2563eb" />
                 </linearGradient>
                 <linearGradient id="quicGrad" x1="0" y1="0" x2="1" y2="1">
-                    <stop offset="0%" stopColor="#8b5cf6" />
-                    <stop offset="100%" stopColor="#6d28d9" />
+                    <stop offset="0%" stopColor="#1d4ed8" />
+                    <stop offset="100%" stopColor="#1e3a8a" />
                 </linearGradient>
 
                 {/* Area Gradients */}
@@ -70,7 +70,7 @@ export default function ZeroCopySvg() {
             <text x="425" y="218" textAnchor="middle" fill="var(--text-secondary)" fontSize="14" fontFamily="monospace">split().freeze()</text>
 
             {/* UDP Socket */}
-            <rect x="630" y="170" width="160" height="60" rx="8" fill="var(--bg-primary)" stroke="#8b5cf6" strokeWidth="2" />
+            <rect x="630" y="170" width="160" height="60" rx="8" fill="var(--bg-primary)" stroke="#1d4ed8" strokeWidth="2" />
             <text x="710" y="207" textAnchor="middle" fill="var(--text-primary)" fontSize="20" fontWeight="600">UDP Port 443</text>
 
             {/* Paths / Lines */}

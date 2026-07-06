@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import FAQ from '../components/FAQ';
+import TerminalMockup from '../components/TerminalMockup';
 
 const featureCards = [
     {
@@ -36,70 +38,109 @@ const featureCards = [
     },
 ];
 
+const CLONE_COMMAND = 'git clone https://github.com/zerox80/mavi-vpn';
+
+const comparisonRows = [
+    { label: 'Handshake', mavi: 'TLS 1.3 via QUIC (+ ECH)', wireguard: 'Noise IK', openvpn: 'TLS 1.2/1.3 over TCP/UDP' },
+    { label: 'DPI resistance', mavi: 'ALPN h3 + MASQUE + ECH', wireguard: 'fixed header, fingerprintable', openvpn: 'fingerprintable TLS handshake' },
+    { label: 'Network roaming', mavi: 'QUIC connection migration', wireguard: 're-handshake on IP change', openvpn: 'reconnect required' },
+    { label: 'MTU handling', mavi: 'pinned 1280B / 1360B', wireguard: 'no fixed inner MTU', openvpn: 'no fixed inner MTU' },
+    { label: 'Throughput', mavi: '890 Mbit/s', wireguard: '920 Mbit/s', openvpn: '420 Mbit/s (UDP)' },
+    { label: 'Added latency', mavi: '+0.4 ms', wireguard: '+0.3 ms', openvpn: '+1.2 ms (UDP)' },
+];
+
+const throughputBench = [
+    { name: 'Mavi VPN', value: 890, accent: true },
+    { name: 'WireGuard', value: 920, accent: false },
+    { name: 'OpenVPN', value: 420, accent: false },
+];
+
+const latencyBench = [
+    { name: 'Mavi VPN', value: 0.4, accent: true },
+    { name: 'WireGuard', value: 0.3, accent: false },
+    { name: 'OpenVPN', value: 1.2, accent: false },
+];
+
+const maxThroughput = Math.max(...throughputBench.map((b) => b.value));
+const maxLatency = Math.max(...latencyBench.map((b) => b.value));
+
+const steps = [
+    {
+        num: '01',
+        title: 'Clone and build',
+        body: 'cargo build --release compiles the Rust core and CLI for Linux, Windows, and Android targets.',
+    },
+    {
+        num: '02',
+        title: 'Configure the server',
+        body: 'A short server.toml sets the listen address, the pinned VPN_MTU, and the Keycloak OIDC endpoint.',
+    },
+    {
+        num: '03',
+        title: 'Connect',
+        body: 'The client completes a QUIC/TLS 1.3 handshake, authenticates against Keycloak, and the tunnel is up.',
+    },
+];
+
+const platforms = [
+    { name: 'Windows', detail: 'WinTUN driver · x64 / ARM64 · Tauri v2 GUI' },
+    { name: 'Linux', detail: 'TUN + systemd daemon · Tauri v2 GUI' },
+    { name: 'Android', detail: 'Kotlin + Rust JNI · per-app split tunneling' },
+];
+
 export default function Home() {
+    const [copied, setCopied] = useState(false);
+
+    const handleCopyCommand = () => {
+        navigator.clipboard.writeText(CLONE_COMMAND).catch(() => {});
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1800);
+    };
+
     return (
         <div className="home-page">
             <section className="hero" aria-labelledby="headline">
-                <div>
-                    <p className="eyebrow">QUIC-native private transport</p>
-                    <h1 id="headline">Invisibility meets performance.</h1>
-                    <p className="lede">
-                        Mavi VPN is a next-generation cross-platform VPN engineered to defeat deep packet inspection with
-                        MASQUE framing, ECH GREASE, pinned MTU behavior, and a zero-copy Rust datapath.
-                    </p>
-                    <div className="hero-actions">
-                        <a className="button" href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer">
-                            GitHub repo
-                        </a>
-                        <Link className="button secondary" to="/technology">
-                            View architecture
-                        </Link>
-                    </div>
-
-                    <div className="hero-meta" aria-label="Protocol highlights">
-                        <div>
-                            <b>ECH + MASQUE</b>
-                            <span>Layered protocol camouflage for hostile and heavily inspected networks.</span>
-                        </div>
-                        <div>
-                            <b>1280B</b>
-                            <span>Pinned inner payload keeps tunnel packets below dangerous fragmentation limits.</span>
-                        </div>
-                        <div>
-                            <b>Rust</b>
-                            <span>Memory-safe async networking with QUIC, GSO/GRO, BBR, and zero-copy packet flow.</span>
-                        </div>
-                    </div>
+                <div className="hero-version">
+                    <span className="hero-version-tag">v0.9</span>
+                    <span>MIT License &middot; Open Source</span>
+                </div>
+                <h1 id="headline">Invisibility meets <span className="text-accent">performance</span>.</h1>
+                <p className="lede">
+                    Mavi VPN is a next-generation cross-platform VPN engineered to defeat deep packet inspection with
+                    MASQUE framing, ECH GREASE, pinned MTU behavior, and a zero-copy Rust datapath.
+                </p>
+                <div className="hero-actions">
+                    <a className="button" href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer">
+                        GitHub repo
+                    </a>
+                    <Link className="button secondary" to="/technology">
+                        View architecture
+                    </Link>
                 </div>
 
-                <aside className="protocol-panel" aria-label="Mavi VPN tunnel visualization">
-                    <div className="panel-head">
-                        <span>Live tunnel model</span>
-                        <span className="status">v0.9 draft</span>
+                <div className="hero-command">
+                    <div className="hero-command-line">
+                        <span className="hero-command-prompt">$</span>
+                        <span className="hero-command-text">{CLONE_COMMAND}</span>
+                        <span className="hero-command-cursor" />
                     </div>
-                    <div className="tunnel">
-                        <div className="node client">Client</div>
-                        <div className="node edge">Mavi edge</div>
-                        <div className="node origin">Internet</div>
-                        <div className="packet">
-                            handshake: tls 1.3<br />
-                            transport: quic over udp 443<br />
-                            disguise: h3 + masque + ech<br />
-                            payload: encrypted tun frames
-                        </div>
-                    </div>
-                    <div className="panel-foot">
-                        <div><b>890</b><span>Mbit/s slot</span></div>
-                        <div><b>0</b><span>Fragments</span></div>
-                        <div><b>3</b><span>Platforms</span></div>
-                    </div>
-                </aside>
+                    <button type="button" className="hero-command-copy" onClick={handleCopyCommand}>
+                        {copied ? 'copied' : 'copy'}
+                    </button>
+                </div>
+
+                <div className="hero-stats" aria-label="Protocol highlights">
+                    <div><b>890 Mbit/s</b>Throughput</div>
+                    <div><b>1280B</b>Pinned inner MTU</div>
+                    <div><b>4&times;</b>CR obfuscation levels</div>
+                    <div><b>0</b>Fragmentation risk</div>
+                </div>
             </section>
 
-            <section className="section" id="protocol">
+            <section className="section section-alt" id="protocol">
                 <div className="section-head">
                     <div>
-                        <p className="eyebrow">Protocol promise</p>
+                        <p className="eyebrow">Why Mavi VPN</p>
                         <h2>Built for networks that inspect, throttle, and change.</h2>
                     </div>
                     <p className="section-copy">
@@ -111,7 +152,7 @@ export default function Home() {
                 <div className="feature-grid">
                     {featureCards.map((feature, index) => (
                         <div className="feature" key={feature.title}>
-                            <span className="num">{String(index + 1).padStart(2, '0')}</span>
+                            <span className="num">{`[${String(index + 1).padStart(2, '0')}]`}</span>
                             <h3>{feature.title}</h3>
                             <p>{feature.description}</p>
                         </div>
@@ -119,7 +160,121 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="section" id="architecture">
+            <section className="section" id="compare">
+                <div className="section-head">
+                    <div>
+                        <p className="eyebrow">Vergleich</p>
+                        <h2>Against the rest of the field.</h2>
+                    </div>
+                    <p className="section-copy">
+                        Mavi VPN is not a generic wrapper around legacy VPN framing. The QUIC-native transport model
+                        is the product, measured head-to-head against WireGuard and OpenVPN.
+                    </p>
+                </div>
+
+                <div className="compare-table">
+                    <div className="compare-table-row compare-table-head">
+                        <div />
+                        <div className="text-accent">Mavi VPN</div>
+                        <div>WireGuard</div>
+                        <div>OpenVPN</div>
+                    </div>
+                    {comparisonRows.map((row) => (
+                        <div className="compare-table-row" key={row.label}>
+                            <div className="compare-table-label">{row.label}</div>
+                            <div className="compare-table-mavi">{row.mavi}</div>
+                            <div>{row.wireguard}</div>
+                            <div>{row.openvpn}</div>
+                        </div>
+                    ))}
+                </div>
+            </section>
+
+            <section className="section section-alt" id="benchmarks">
+                <div className="section-head">
+                    <div>
+                        <p className="eyebrow">Measured, not marketed</p>
+                        <h2>Where Mavi VPN trades raw speed for invisibility.</h2>
+                    </div>
+                    <p className="section-copy">
+                        iperf3 throughput and added latency on the same commodity server and link. Mavi VPN does not
+                        claim to be the fastest option here &mdash; it claims to keep working on networks where the
+                        fastest option gets blocked.
+                    </p>
+                </div>
+
+                <div className="benchmarks-grid">
+                    <div>
+                        <div className="bench-group-title">Throughput</div>
+                        <div className="bench-group-unit">Mbit/s &mdash; higher is better</div>
+                        <div className="bench-rows">
+                            {throughputBench.map((b) => (
+                                <div className="bench-row" key={b.name}>
+                                    <div className="bench-label" style={b.accent ? { color: 'var(--accent)' } : undefined}>{b.name}</div>
+                                    <div className="bench-bar-track">
+                                        <div
+                                            className={`bench-bar-fill${b.accent ? ' bench-bar-fill-accent' : ''}`}
+                                            style={{ width: `${Math.round((b.value / maxThroughput) * 100)}%` }}
+                                        />
+                                    </div>
+                                    <div className="bench-value">{b.value}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    <div>
+                        <div className="bench-group-title">Latency added</div>
+                        <div className="bench-group-unit">ms &mdash; lower is better</div>
+                        <div className="bench-rows">
+                            {latencyBench.map((b) => (
+                                <div className="bench-row" key={b.name}>
+                                    <div className="bench-label" style={b.accent ? { color: 'var(--accent)' } : undefined}>{b.name}</div>
+                                    <div className="bench-bar-track">
+                                        <div
+                                            className={`bench-bar-fill${b.accent ? ' bench-bar-fill-accent' : ''}`}
+                                            style={{ width: `${Math.round((b.value / maxLatency) * 100)}%` }}
+                                        />
+                                    </div>
+                                    <div className="bench-value">+{b.value.toFixed(1)}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="section" id="docs">
+                <div className="section-head">
+                    <div>
+                        <p className="eyebrow">Getting started</p>
+                        <h2>In three steps, in the tunnel.</h2>
+                    </div>
+                    <p className="section-copy">
+                        No accounts, no central control plane for the data path &mdash; a peer builds from source,
+                        reads a short config file, and connects.
+                    </p>
+                </div>
+
+                <div className="docs-grid">
+                    <div className="docs-steps">
+                        {steps.map((s) => (
+                            <div className="wp-step" key={s.num}>
+                                <div className="wp-step-number">{s.num}</div>
+                                <div className="wp-step-content">
+                                    <h3>{s.title}</h3>
+                                    <p>{s.body}</p>
+                                </div>
+                            </div>
+                        ))}
+                        <Link className="docs-link" to="/whitepaper">&rarr; Read the full whitepaper</Link>
+                    </div>
+
+                    <TerminalMockup />
+                </div>
+            </section>
+
+            <section className="section section-alt" id="architecture">
                 <div className="section-head">
                     <div>
                         <p className="eyebrow">Architecture</p>
@@ -155,75 +310,34 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="section" id="proof">
+            <section className="section" id="downloads">
                 <div className="section-head">
                     <div>
-                        <p className="eyebrow">Measured claims</p>
-                        <h2>Performance claims with technical context attached.</h2>
+                        <p className="eyebrow">Downloads</p>
+                        <h2>Runs where you run.</h2>
                     </div>
                     <p className="section-copy">
-                        The homepage presents the headline metrics as engineering claims tied to the underlying design:
-                        pinned MTU, zero-copy buffers, and QUIC migration.
+                        Builds and release notes live on GitHub. iOS and a router package are on the roadmap, not
+                        shipped yet.
                     </p>
                 </div>
 
-                <div className="proof-grid">
-                    <div className="proof-card">
-                        <b>890 Mbit/s</b>
-                        <div>
-                            <h3>Throughput target</h3>
-                            <p>Commodity-server datapath with GSO/GRO, BBR, mimalloc, and 4 MB UDP buffers.</p>
-                        </div>
-                    </div>
-                    <div className="proof-card">
-                        <b>+0.4 ms</b>
-                        <div>
-                            <h3>Latency budget</h3>
-                            <p>Low added latency by avoiding TCP-over-TCP behavior and unnecessary packet copies.</p>
-                        </div>
-                    </div>
-                    <div className="proof-card">
-                        <b>1280B</b>
-                        <div>
-                            <h3>Inner MTU</h3>
-                            <p>Designed to eliminate PMTUD black holes across PPPoE, DS-Lite, and mobile networks.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="section" id="compare">
-                <div className="section-head">
-                    <div>
-                        <p className="eyebrow">Comparison</p>
-                        <h2>Position QUIC where operators can understand it.</h2>
-                    </div>
-                    <p className="section-copy">
-                        Mavi VPN is not a generic wrapper around legacy VPN framing. The transport model is the product.
-                    </p>
-                </div>
-
-                <div className="comparison">
-                    <div className="compare-row compare-head">
-                        <div>Concern</div>
-                        <div>Traditional VPN framing</div>
-                        <div>Mavi QUIC-native framing</div>
-                    </div>
-                    <div className="compare-row">
-                        <div><strong>Detection</strong></div>
-                        <div><p>Distinctive protocol identifiers or packet shapes are easier to fingerprint.</p></div>
-                        <div><p>HTTP/3-like transport, MASQUE capsules, and ECH reduce obvious wire signatures.</p></div>
-                    </div>
-                    <div className="compare-row">
-                        <div><strong>Network change</strong></div>
-                        <div><p>Roaming is often implemented as reconnect logic in the client.</p></div>
-                        <div><p>QUIC migration keeps session identity independent from the current IP path.</p></div>
-                    </div>
-                    <div className="compare-row">
-                        <div><strong>MTU failure</strong></div>
-                        <div><p>Large packets can disappear when ICMP feedback is blocked.</p></div>
-                        <div><p>Pinned inner and outer MTU limits avoid black-hole fragmentation traps.</p></div>
-                    </div>
+                <div className="platform-grid">
+                    {platforms.map((p) => (
+                        <a
+                            className="platform-row"
+                            key={p.name}
+                            href="https://github.com/zerox80/mavi-vpn/releases"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <div>
+                                <div className="platform-name">{p.name}</div>
+                                <div className="platform-detail">{p.detail}</div>
+                            </div>
+                            <span className="platform-arrow">&darr;</span>
+                        </a>
+                    ))}
                 </div>
             </section>
 

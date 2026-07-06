@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { GitHub } from './icons/GitHub';
 
 export default function Footer() {
     return (
@@ -25,7 +26,8 @@ export default function Footer() {
                     </div>
                     <div className="link-group">
                         <h4 className="link-title">Project</h4>
-                        <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="footer-link">
+                        <a href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer" className="footer-link icon-link">
+                            <GitHub size={14} />
                             GitHub Repo
                         </a>
                         <a href="https://github.com/zerox80/mavi-vpn/issues" target="_blank" rel="noopener noreferrer" className="footer-link">
