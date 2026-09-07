@@ -1,6 +1,5 @@
-import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const faqs = [
     {
@@ -38,80 +37,19 @@ const faqs = [
 ];
 
 export default function FAQ() {
-    const [openIndex, setOpenIndex] = useState<number | null>(null);
-
-    const toggleFaq = (index: number) => {
-        setOpenIndex(openIndex === index ? null : index);
-    };
-
     return (
-        <section className="faq-section" id="faq">
-            <div className="container">
-                <div className="section-header text-center faq-header">
-                    <motion.h2
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                        className="section-title"
-                    >
-                        Frequently Asked Questions
-                    </motion.h2>
-                    <motion.p
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                        className="section-subtitle"
-                        style={{ maxWidth: '550px', marginInline: 'auto' }}
-                    >
-                        Everything you need to know about deployment, operation, and security.
-                    </motion.p>
-                </div>
-
-                <div className="faq-container">
-                    {faqs.map((faq, index) => {
-                        const isOpen = openIndex === index;
-                        return (
-                            <motion.div
-                                key={index}
-                                initial={{ opacity: 0, y: 15 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.05, duration: 0.4 }}
-                                className={`faq-item ${isOpen ? 'open' : ''}`}
-                            >
-                                <button
-                                    className="faq-question"
-                                    onClick={() => toggleFaq(index)}
-                                >
-                                    {faq.question}
-                                    <motion.div
-                                        className="faq-question-icon"
-                                        animate={{ rotate: isOpen ? 180 : 0 }}
-                                        transition={{ duration: 0.2 }}
-                                    >
-                                        <ChevronDown size={18} />
-                                    </motion.div>
-                                </button>
-                                <AnimatePresence>
-                                    {isOpen && (
-                                        <motion.div
-                                            key="answer"
-                                            initial={{ height: 0, opacity: 0 }}
-                                            animate={{ height: "auto", opacity: 1 }}
-                                            exit={{ height: 0, opacity: 0 }}
-                                            transition={{ duration: 0.2, ease: "easeInOut" }}
-                                            style={{ overflow: 'hidden' }}
-                                        >
-                                            <p className="faq-answer">{faq.answer}</p>
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </motion.div>
-                        );
-                    })}
-                </div>
+        <section className="faq-section" id="faq" aria-labelledby="faq-title">
+            <div className="faq-header">
+                <div><p className="eyebrow">Good to know</p><h2 id="faq-title">Questions, answered.</h2></div>
+                <Link className="text-link" to="/whitepaper">Read the whitepaper →</Link>
+            </div>
+            <div className="faq-container">
+                {faqs.map((faq) => (
+                    <details className="faq-item" name="mavi-faq" key={faq.question}>
+                        <summary className="faq-question">{faq.question}<ChevronDown size={16} aria-hidden="true" /></summary>
+                        <p className="faq-answer">{faq.answer}</p>
+                    </details>
+                ))}
             </div>
         </section>
     );

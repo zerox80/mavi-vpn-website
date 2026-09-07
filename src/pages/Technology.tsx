@@ -1,3 +1,4 @@
+import PageIndex from '../components/PageIndex';
 import Architecture from '../components/Architecture';
 import HandshakeSvg from '../components/HandshakeSvg';
 import ZeroCopySvg from '../components/ZeroCopySvg';
@@ -11,18 +12,32 @@ const crLevels = [
 
 export default function Technology() {
     return (
-        <div className="animate-fade-in" style={{ paddingTop: '7rem', paddingBottom: '3.5rem' }}>
-            <div className="container" style={{ marginBottom: '3.5rem', textAlign: 'center' }}>
-                <h1 className="section-title">Under the Hood</h1>
-                <p className="section-subtitle" style={{ maxWidth: '700px', marginInline: 'auto' }}>
+        <div className="technology-page animate-fade-in">
+            <div className="container technology-hero">
+                <p className="eyebrow">The architecture</p>
+                <h1 className="hero-title">Under the Hood</h1>
+                <p className="section-subtitle">
                     Cryptographic and networking breakthroughs that allow Mavi VPN to
                     operate invisibly in hostile environments.
                 </p>
             </div>
 
+            <div className="document-shell">
+                <PageIndex items={[
+                    { id: 'architecture', label: 'Pinned MTU' },
+                    { id: 'censorship-resistance', label: 'Resistance levels' },
+                    { id: 'handshake', label: 'QUIC handshake' },
+                    { id: 'masque', label: 'MASQUE framing' },
+                    { id: 'ech', label: 'Encrypted Client Hello' },
+                    { id: 'datapath', label: 'Zero-copy Rust' },
+                    { id: 'roaming', label: 'Network roaming' },
+                    { id: 'dns', label: 'Dual-stack & DNS' },
+                    { id: 'identity', label: 'Access control' },
+                ]} />
+                <div className="technology-content">
             <Architecture />
 
-            <section className="container tech-section">
+            <section className="container tech-section" id="censorship-resistance">
                 <p className="eyebrow">Censorship resistance</p>
                 <h2 className="section-title tech-section-header">Censorship Resistance Levels</h2>
                 <div className="cr-table-wrapper">
@@ -57,7 +72,7 @@ export default function Technology() {
                 </div>
             </section>
 
-            <section className="container tech-section">
+            <section className="container tech-section" id="handshake">
                 <p className="eyebrow">0-RTT & masquerading</p>
                 <h2 className="section-title tech-section-header">QUIC 0-RTT & ALPN Masquerading</h2>
                 <div className="tech-glass-grid">
@@ -78,7 +93,7 @@ export default function Technology() {
                 </div>
             </section>
 
-            <section className="container tech-section">
+            <section className="container tech-section" id="masque">
                 <p className="eyebrow">MASQUE</p>
                 <h2 className="section-title tech-section-header">MASQUE / RFC 9484</h2>
                 <div className="tech-glass">
@@ -99,7 +114,7 @@ export default function Technology() {
                 </div>
             </section>
 
-            <section className="container tech-section">
+            <section className="container tech-section" id="ech">
                 <p className="eyebrow">ECH</p>
                 <h2 className="section-title tech-section-header">Encrypted Client Hello (ECH)</h2>
                 <div className="tech-glass">
@@ -117,7 +132,7 @@ export default function Technology() {
                 </div>
             </section>
 
-            <section className="container tech-section">
+            <section className="container tech-section" id="datapath">
                 <p className="eyebrow">Datapath</p>
                 <h2 className="section-title tech-section-header">Zero-Copy Datapath in Rust</h2>
                 <div className="tech-glass">
@@ -137,7 +152,7 @@ export default function Technology() {
                 </div>
             </section>
 
-            <section className="container tech-section">
+            <section className="container tech-section" id="roaming">
                 <p className="eyebrow">Roaming</p>
                 <h2 className="section-title tech-section-header">Seamless Roaming</h2>
                 <div className="tech-glass">
@@ -151,7 +166,7 @@ export default function Technology() {
                 </div>
             </section>
 
-            <section className="container tech-section">
+            <section className="container tech-section" id="dns">
                 <p className="eyebrow">Dual-stack & DNS</p>
                 <h2 className="section-title tech-section-header">Dual-Stack & DNS Isolation</h2>
                 <div className="tech-glass">
@@ -163,7 +178,7 @@ export default function Technology() {
                 </div>
             </section>
 
-            <section className="container tech-section">
+            <section className="container tech-section" id="identity">
                 <p className="eyebrow">Access control</p>
                 <h2 className="section-title tech-section-header">Enterprise Access Control</h2>
                 <div className="tech-glass">
@@ -173,6 +188,8 @@ export default function Technology() {
                     </p>
                 </div>
             </section>
+                </div>
+            </div>
         </div>
     );
 }

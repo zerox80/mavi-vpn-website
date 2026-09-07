@@ -1,3 +1,4 @@
+import PageIndex from '../components/PageIndex';
 
 import { FileText, Shield, Zap, Lock, Activity, Server, Smartphone, Globe, Cpu, CheckCircle, BookOpen, Layers } from 'lucide-react';
 
@@ -5,53 +6,30 @@ export default function Whitepaper() {
     return (
         <div className="whitepaper-page">
             <section className="whitepaper-hero">
-                <div className="container" style={{ position: 'relative', zIndex: 10 }}>
-                    <div className="text-center">
-                        <div className="badge animate-fade-in" style={{ margin: '0 auto', marginBottom: '1.5rem' }}>
-                            <FileText size={14} className="text-accent" />
-                            Technical Whitepaper
-                        </div>
-                        <h1 className="hero-title animate-fade-in" style={{ animationDelay: '100ms' }}>
-                            Mavi VPN Technical <span className="text-accent">Architecture</span>
-                        </h1>
-                        <p className="hero-subtitle animate-fade-in" style={{ animationDelay: '200ms', maxWidth: '700px', margin: '0 auto' }}>
-                            A Deep Dive into Protocol Design, Security Architecture & Network Engineering
-                        </p>
-                        <div className="whitepaper-meta animate-fade-in" style={{ animationDelay: '300ms' }}>
-                            <span>By: Mavi Dev Team</span>
-                            <span className="meta-divider">&bull;</span>
-                            <span>Updated: April 2026</span>
-                            <span className="meta-divider">&bull;</span>
-                            <span>Version: 3.0</span>
-                        </div>
-                    </div>
-                </div>
+                <p className="eyebrow"><FileText size={14} aria-hidden="true" /> Technical whitepaper</p>
+                <h1>Mavi VPN <span className="text-accent">Technical Architecture</span></h1>
+                <p className="hero-subtitle">Protocol design, security architecture, and network engineering.</p>
+                <div className="whitepaper-meta"><span>Mavi Dev Team</span><span className="meta-divider">/</span><span>April 2026</span><span className="meta-divider">/</span><span>Version 3.0</span></div>
             </section>
 
             <div className="container whitepaper-container">
+                <PageIndex items={[
+                    { id: 'introduction', label: 'Introduction' },
+                    { id: 'background', label: 'Background' },
+                    { id: 'architecture-overview', label: 'Architecture overview' },
+                    { id: 'protocol-specification', label: 'Protocol specification' },
+                    { id: 'security-censorship', label: 'Security & censorship' },
+                    { id: 'mtu-strategy', label: 'Pinned MTU strategy' },
+                    { id: 'implementation', label: 'Implementation' },
+                    { id: 'performance', label: 'Performance' },
+                    { id: 'conclusion', label: 'Conclusion & references' },
+                ]} />
+                <div className="whitepaper-article">
                 <section className="whitepaper-abstract animate-fade-in" style={{ animationDelay: '400ms' }}>
                     <h2 className="abstract-title">Abstract</h2>
                     <p>
                         A comprehensive technical specification of Mavi VPN — a high-performance, censorship-resistant VPN built atop IETF QUIC (RFC 9000). We examine the cryptographic guarantees, DPI evasion through ALPN masquerading, MASQUE/RFC 9484 capsule framing, ECH GREASE, active-probe resistance, the Pinned MTU strategy, and cross-platform implementation spanning Windows, Linux, and Android.
                     </p>
-                </section>
-
-                <section className="animate-fade-in" style={{ animationDelay: '450ms', padding: '1.5rem', marginBottom: '2rem', background: 'var(--bg-secondary)', border: '1px solid var(--border)', borderRadius: 'var(--radius-lg)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1rem' }}>
-                        <BookOpen size={18} className="text-accent" />
-                        <h2 style={{ margin: 0, fontSize: '1.1rem', fontWeight: 700 }}>Table of Contents</h2>
-                    </div>
-                    <ol style={{ margin: 0, paddingLeft: '1.5rem', lineHeight: '2.2', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-                        <li><a href="#introduction" style={{ color: 'var(--accent)' }}>Introduction & Motivation</a></li>
-                        <li><a href="#background" style={{ color: 'var(--accent)' }}>Background: Why Existing VPNs Fall Short</a></li>
-                        <li><a href="#architecture-overview" style={{ color: 'var(--accent)' }}>Architecture Overview</a></li>
-                        <li><a href="#protocol-specification" style={{ color: 'var(--accent)' }}>Protocol Specification</a></li>
-                        <li><a href="#security-censorship" style={{ color: 'var(--accent)' }}>Security & Censorship Resistance</a></li>
-                        <li><a href="#mtu-strategy" style={{ color: 'var(--accent)' }}>MTU Strategy: The "Pinned Mode"</a></li>
-                        <li><a href="#implementation" style={{ color: 'var(--accent)' }}>Implementation Details</a></li>
-                        <li><a href="#performance" style={{ color: 'var(--accent)' }}>Performance Engineering</a></li>
-                        <li><a href="#conclusion" style={{ color: 'var(--accent)' }}>Conclusion & Future Work</a></li>
-                    </ol>
                 </section>
 
                 <div className="whitepaper-content animate-fade-in" style={{ animationDelay: '500ms' }}>
@@ -486,6 +464,7 @@ QUIC DATAGRAM Frame:
                         </ul>
                     </section>
 
+                </div>
                 </div>
             </div>
         </div>
