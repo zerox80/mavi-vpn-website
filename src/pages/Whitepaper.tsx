@@ -6,8 +6,8 @@ export default function Whitepaper() {
     return (
         <div className="whitepaper-page">
             <section className="whitepaper-hero">
-                <p className="eyebrow"><FileText size={14} aria-hidden="true" /> Technical whitepaper</p>
-                <h1>Mavi VPN <span className="text-accent">Technical Architecture</span></h1>
+                <p className="eyebrow"><FileText size={14} aria-hidden="true" /> Inside Mavi / Whitepaper</p>
+                <h1>The thinking<br /><span className="text-accent">behind the tunnel.</span></h1>
                 <p className="hero-subtitle">Protocol design, security architecture, and network engineering.</p>
                 <div className="whitepaper-meta"><span>Mavi Dev Team</span><span className="meta-divider">/</span><span>April 2026</span><span className="meta-divider">/</span><span>Version 3.0</span></div>
             </section>

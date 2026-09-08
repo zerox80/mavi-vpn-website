@@ -5,7 +5,7 @@ export default function Footer() {
     return (
         <footer className="footer">
             <div className="footer-main">
-                <Link to="/" className="brand" aria-label="Mavi VPN home"><span className="brand-mark" aria-hidden="true"><img src="/mavi-logo.png" alt="" /></span><span>Mavi VPN</span></Link>
+                <Link to="/" className="brand" aria-label="Mavi VPN home"><span className="brand-mark" aria-hidden="true"><img src="/mavi-logo.png" alt="" /></span><span>mavi<span className="brand-vpn">VPN</span></span></Link>
                 <nav className="footer-links" aria-label="Footer navigation">
                     <Link to="/" className="footer-link">Home</Link>
                     <Link to="/technology" className="footer-link">Technology</Link>

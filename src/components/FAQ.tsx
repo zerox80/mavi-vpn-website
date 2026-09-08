@@ -40,7 +40,8 @@ export default function FAQ() {
     return (
         <section className="faq-section" id="faq" aria-labelledby="faq-title">
             <div className="faq-header">
-                <div><p className="eyebrow">Good to know</p><h2 id="faq-title">Questions, answered.</h2></div>
+                <div><p className="eyebrow">03 / A little more clarity</p><h2 id="faq-title">Good questions.<br /><span className="heading-muted">Clear answers.</span></h2></div>
+                <p>From the protocol to your platform. <br />Get to know Mavi a little better.</p>
                 <Link className="text-link" to="/whitepaper">Read the whitepaper →</Link>
             </div>
             <div className="faq-container">

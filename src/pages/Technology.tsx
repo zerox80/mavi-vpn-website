@@ -14,11 +14,11 @@ export default function Technology() {
     return (
         <div className="technology-page animate-fade-in">
             <div className="container technology-hero">
-                <p className="eyebrow">The architecture</p>
-                <h1 className="hero-title">Under the Hood</h1>
+                <p className="eyebrow">Inside Mavi / Technology</p>
+                <h1 className="hero-title">Privacy is in<br /><span className="text-accent">the details.</span></h1>
                 <p className="section-subtitle">
-                    Cryptographic and networking breakthroughs that allow Mavi VPN to
-                    operate invisibly in hostile environments.
+                    Explore the transport, encryption, and network engineering
+                    behind a resilient connection.
                 </p>
             </div>
 
