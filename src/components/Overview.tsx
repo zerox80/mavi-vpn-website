@@ -48,13 +48,13 @@ export default function Overview() {
 
     return (
         <section className="overview" aria-labelledby="overview-title">
-            <div className="panel-heading"><div><p className="eyebrow">01 / Engineered for the open internet</p><h2 id="overview-title">One protocol.<br /><span className="heading-muted">Every layer considered.</span></h2></div><p className="overview-intro">Modern transport. Thoughtful engineering. <br />Explore what makes Mavi work.</p></div>
+            <div className="panel-heading"><div><p className="eyebrow">02 / Under the surface</p><h2 id="overview-title">A closer look.</h2></div><p className="overview-intro">Explore the protocol, compare the numbers, and follow the packet path.</p></div>
             <div className="overview-tabs" role="tablist" aria-label="Explore Mavi VPN">
                 {tabs.map((tab, index) => (<Link key={tab.id} to={'/#' + tab.id} replace role="tab" id={'tab-' + tab.id} aria-controls={tab.id} aria-selected={activeTab === tab.id} tabIndex={activeTab === tab.id ? 0 : -1} onKeyDown={(event) => handleTabKeyDown(event, index)}>{tab.label}</Link>))}
             </div>
             <div className="overview-body">
                 <div className="overview-panel" id="protocol" role="tabpanel" aria-labelledby="tab-protocol" tabIndex={0} hidden={activeTab !== 'protocol'}>
-                    <div className="feature-grid">{features.map(({ title, description, icon: Icon }, index) => (<article className="feature" key={title}><div className="feature-top"><span className="feature-icon"><Icon size={23} strokeWidth={1.5} aria-hidden="true" /></span><span className="feature-number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span></div><h3>{title}</h3><p>{description}</p></article>))}</div>
+                    <div className="feature-grid">{features.map(({ title, description, icon: Icon }) => (<article className="feature" key={title}><div className="feature-top"><span className="feature-icon"><Icon size={23} strokeWidth={1.5} aria-hidden="true" /></span></div><h3>{title}</h3><p>{description}</p></article>))}</div>
                 </div>
                 <div className="overview-panel" id="compare" role="tabpanel" aria-labelledby="tab-compare" tabIndex={0} hidden={activeTab !== 'compare'}>
                     <div className="comparison-scroll" role="region" aria-label="VPN protocol comparison" tabIndex={0}>

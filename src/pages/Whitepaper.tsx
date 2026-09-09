@@ -6,8 +6,8 @@ export default function Whitepaper() {
     return (
         <div className="whitepaper-page">
             <section className="whitepaper-hero">
-                <p className="eyebrow"><FileText size={14} aria-hidden="true" /> Inside Mavi / Whitepaper</p>
-                <h1>The thinking<br /><span className="text-accent">behind the tunnel.</span></h1>
+                <p className="eyebrow"><FileText size={14} aria-hidden="true" /> Whitepaper</p>
+                <h1>The Mavi whitepaper.</h1>
                 <p className="hero-subtitle">Protocol design, security architecture, and network engineering.</p>
                 <div className="whitepaper-meta"><span>Mavi Dev Team</span><span className="meta-divider">/</span><span>April 2026</span><span className="meta-divider">/</span><span>Version 3.0</span></div>
             </section>
@@ -25,14 +25,14 @@ export default function Whitepaper() {
                     { id: 'conclusion', label: 'Conclusion & references' },
                 ]} />
                 <div className="whitepaper-article">
-                <section className="whitepaper-abstract animate-fade-in" style={{ animationDelay: '400ms' }}>
+                <section className="whitepaper-abstract">
                     <h2 className="abstract-title">Abstract</h2>
                     <p>
-                        A comprehensive technical specification of Mavi VPN — a high-performance, censorship-resistant VPN built atop IETF QUIC (RFC 9000). We examine the cryptographic guarantees, DPI evasion through ALPN masquerading, MASQUE/RFC 9484 capsule framing, ECH GREASE, active-probe resistance, the Pinned MTU strategy, and cross-platform implementation spanning Windows, Linux, and Android.
+                        Mavi VPN is built on IETF QUIC (RFC 9000). This paper describes its encryption, ALPN masquerading, MASQUE framing, ECH GREASE, active-probe resistance, and pinned MTU strategy, with implementation details for Windows, Linux, and Android.
                     </p>
                 </section>
 
-                <div className="whitepaper-content animate-fade-in" style={{ animationDelay: '500ms' }}>
+                <div className="whitepaper-content">
 
                     <section className="wp-section" id="introduction">
                         <h2 className="wp-heading-2">1. Introduction & Motivation</h2>
@@ -93,25 +93,25 @@ export default function Whitepaper() {
                         <div className="wp-grid-2">
                             <div className="wp-card">
                                 <h4 className="wp-card-title">Connection Migration</h4>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
+                                <p>
                                     Connections identified by opaque Connection IDs, not IP 4-tuple. Survives network switches without re-authentication.
                                 </p>
                             </div>
                             <div className="wp-card">
                                 <h4 className="wp-card-title">Stream Multiplexing</h4>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
+                                <p>
                                     Thousands of concurrent streams. Lost packets only block their specific stream — no head-of-line blocking.
                                 </p>
                             </div>
                             <div className="wp-card">
                                 <h4 className="wp-card-title">Mandatory Encryption</h4>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
+                                <p>
                                     TLS 1.3 architecturally integrated. Even handshake metadata encrypted after initial packets.
                                 </p>
                             </div>
                             <div className="wp-card">
                                 <h4 className="wp-card-title">Unreliable Datagrams (RFC 9221)</h4>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
+                                <p>
                                     Unreliable, unordered delivery within encrypted QUIC. No unnecessary retransmission for tunneled IP packets.
                                 </p>
                             </div>
@@ -129,46 +129,21 @@ export default function Whitepaper() {
                             Three deployment targets sharing a common core library. Protocol correctness enforced by construction — different serialization formats are architecturally impossible.
                         </p>
 
-                        <div className="wp-code-block">
-                            <pre>{`┌─────────────────────────────────────────────────────────────────┐
-│                        CLIENT SIDE                              │
-│                                                                 │
-│  ┌─────────────────────┐      ┌──────────────────────────────┐  │
-│  │   Android Client    │      │      Windows Client          │  │
-│  │  ┌──────────────┐   │      │  ┌────────────────────────┐  │  │
-│  │  │ Kotlin UI    │   │      │  │   Rust Binary          │  │  │
-│  │  │ (VpnService) │   │      │  │   (Tokio async)        │  │  │
-│  │  └──────┬───────┘   │      │  └──────────┬─────────────┘  │  │
-│  │         │ JNI       │      │             │ WinTUN API      │  │
-│  │  ┌──────▼───────┐   │      │  ┌──────────▼─────────────┐  │  │
-│  │  │ libmavivpn   │   │      │  │   wintun crate         │  │  │
-│  │  │ .so (Rust)   │   │      │  │   (Layer 3 TUN)        │  │  │
-│  │  └──────────────┘   │      │  └────────────────────────┘  │  │
-│  └─────────────────────┘      └──────────────────────────────┘  │
-│                                                                 │
-│  ┌─────────────────────┐      ┌──────────────────────────────┐  │
-│  │   Linux Client      │      │   Tauri v2 GUI               │  │
-│  │  ┌──────────────┐   │      │   (Windows + Linux)          │  │
-│  │  │ Rust Binary  │   │      └──────────────────────────────┘  │
-│  │  │ (Tokio async)│   │                                        │
-│  │  └──────┬───────┘   │                                        │
-│  │         │ /dev/net/  │                                        │
-│  │  ┌──────▼───────┐   │                                        │
-│  │  │ Linux TUN    │   │                                        │
-│  │  └──────────────┘   │                                        │
-│  └─────────────────────┘                                        │
-│            └──────────┬──────────────────────┐                   │
-│                       │ QUIC/UDP (DATAGRAM frames)               │
-│                       │ ALPN: "h3" (CR) / "mavivpn"             │
-│                       │ TLS 1.3 mandatory                        │
-└───────────────────────┼─────────────────────────────────────────┘`}
-                            </pre>
-                        </div>
+                        <figure className="document-diagram">
+                            <figcaption>Client architecture</figcaption>
+                            <div className="client-architecture">
+                                <div><h4>Android</h4><p>Kotlin UI · VpnService</p><span>JNI ↓</span><code>libmavivpn.so · Rust</code></div>
+                                <div><h4>Windows</h4><p>Rust binary · Tokio</p><span>WinTUN API ↓</span><code>wintun crate · Layer 3 TUN</code></div>
+                                <div><h4>Linux</h4><p>Rust binary · Tokio</p><span>/dev/net/tun ↓</span><code>Linux TUN</code></div>
+                            </div>
+                            <p className="diagram-note">Tauri v2 provides the desktop GUI for Windows and Linux.</p>
+                            <div className="architecture-transport"><strong>QUIC / UDP · DATAGRAM frames</strong><span>TLS 1.3 · ALPN h3 (CR mode) or mavivpn (standard)</span></div>
+                        </figure>
 
                         <h3 className="wp-heading-3">3.2 Data Plane vs. Control Plane</h3>
                         <div className="wp-grid-2">
                             <div className="wp-card">
-                                <h4 className="wp-card-title" style={{ color: 'var(--accent)' }}>Control Plane</h4>
+                                <h4 className="wp-card-title">Control Plane</h4>
                                 <ul className="wp-bullets">
                                     <li>QUIC <strong>Streams</strong> (bidirectional, reliable, ordered)</li>
                                     <li>Used only during Auth → Config exchange</li>
@@ -176,7 +151,7 @@ export default function Whitepaper() {
                                 </ul>
                             </div>
                             <div className="wp-card">
-                                <h4 className="wp-card-title" style={{ color: 'var(--accent)' }}>Data Plane</h4>
+                                <h4 className="wp-card-title">Data Plane</h4>
                                 <ul className="wp-bullets">
                                     <li>QUIC <strong>DATAGRAM frames</strong> (RFC 9221) — unreliable</li>
                                     <li>Each tunneled IP packet = one QUIC DATAGRAM</li>
@@ -193,20 +168,20 @@ export default function Whitepaper() {
                         <h2 className="wp-heading-2">4. Protocol Specification</h2>
 
                         <h3 className="wp-heading-3">4.1 QUIC Packet Structure</h3>
-                        <div className="wp-code-block">
-                            <pre>{`Short Header (post-handshake):
-┌─────────┬─────────────────┬───────────────────────────────────────┐
-│ Flags   │ Dest Conn ID    │ Encrypted Payload (AEAD-protected)    │
-│ (1 byte)│ (variable)      │                                       │
-└─────────┴─────────────────┴───────────────────────────────────────┘
-
-QUIC DATAGRAM Frame:
-┌──────────────┬───────────────────────────────────────────────────┐
-│ Frame Type   │ Length (opt.) │ Data (raw IP packet payload)      │
-│ 0x30 / 0x31  │ (2 bytes)     │ (up to negotiated max size)       │
-└──────────────┴───────────────────────────────────────────────────┘`}
-                            </pre>
-                        </div>
+                        <figure className="document-diagram">
+                            <figcaption>Short header · after the handshake</figcaption>
+                            <dl className="packet-fields">
+                                <div><dt>Flags</dt><dd>1 byte</dd></div>
+                                <div><dt>Destination connection ID</dt><dd>Variable length</dd></div>
+                                <div><dt>Encrypted payload</dt><dd>AEAD-protected</dd></div>
+                            </dl>
+                            <figcaption>QUIC DATAGRAM frame</figcaption>
+                            <dl className="packet-fields">
+                                <div><dt>Frame type</dt><dd>0x30 / 0x31</dd></div>
+                                <div><dt>Length</dt><dd>Optional · 2 bytes</dd></div>
+                                <div><dt>Data</dt><dd>Raw IP packet · up to the negotiated maximum</dd></div>
+                            </dl>
+                        </figure>
 
                         <h3 className="wp-heading-3">4.2 Handshake Flow</h3>
                         <div className="wp-steps">
@@ -333,28 +308,28 @@ QUIC DATAGRAM Frame:
                             <div className="wp-implementation-card">
                                 <div className="impl-icon"><Server size={22} /></div>
                                 <h3 className="wp-heading-3">Server</h3>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                                <p>
                                     Tokio async runtime. Zero-copy datapath via <code>bytes::Bytes</code>. GSO for 8x syscall reduction. BBR congestion control. 4MB UDP buffers. Thread-safe IP pool via <code>dashmap</code>.
                                 </p>
                             </div>
                             <div className="wp-implementation-card">
                                 <div className="impl-icon"><Globe size={22} /></div>
                                 <h3 className="wp-heading-3">Windows Client</h3>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                                <p>
                                     WinTUN Layer 3 driver. Network config via <code>netsh</code>. WFP kill switch. Admin elevation for TUN access. Dedicated OS thread for ring buffer I/O.
                                 </p>
                             </div>
                             <div className="wp-implementation-card">
                                 <div className="impl-icon"><Smartphone size={22} /></div>
                                 <h3 className="wp-heading-3">Android Client</h3>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                                <p>
                                     Kotlin <code>VpnService</code> + Rust JNI core (<code>libmavivpn.so</code>). Per-app split tunneling. Always-on VPN support. QUIC connection migration for Wi-Fi/LTE handoffs.
                                 </p>
                             </div>
                             <div className="wp-implementation-card">
                                 <div className="impl-icon"><Globe size={22} /></div>
                                 <h3 className="wp-heading-3">Linux Client</h3>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.5rem' }}>
+                                <p>
                                     TUN via <code>/dev/net/tun</code>. Systemd daemon with socket activation. D-Bus IPC. <code>resolvectl</code> DNS integration. Tauri v2 GUI for desktop.
                                 </p>
                             </div>
@@ -389,6 +364,7 @@ QUIC DATAGRAM Frame:
                             </div>
                         </div>
 
+                        <p className="benchmark-note">Project benchmark figures: iperf3 throughput and added latency on the same server and link. Performance depends on hardware and network conditions.</p>
                         <h3 className="wp-heading-3">8.2 GSO & Zero-Copy Impact</h3>
                         <p className="wp-paragraph">
                             GSO batches multiple QUIC datagrams into a single <code>sendmsg()</code>. Syscall count drops from ~95,000/s to ~12,000/s — 8x reduction. Server CPU at 1 Gbps: ~12% (vs ~45% without GSO).
@@ -397,8 +373,8 @@ QUIC DATAGRAM Frame:
 
                     <section className="wp-section" id="conclusion">
                         <h2 className="wp-heading-2">9. Conclusion & Future Work</h2>
-                        <div style={{ padding: '1.5rem', borderLeft: '3px solid var(--accent)', background: 'color-mix(in oklch, var(--accent) 6%, var(--surface))', borderRadius: '0 var(--radius-md) var(--radius-md) 0', marginBottom: '2rem' }}>
-                            <p className="wp-paragraph mb-0" style={{ fontSize: '1rem', fontWeight: 500 }}>
+                        <div>
+                            <p className="wp-paragraph mb-0">
                                 Mavi VPN demonstrates that censorship resistance, high performance, and network robustness can coexist. By leveraging QUIC's native encryption, the Pinned MTU strategy, and standards-compliant HTTP/3 probe resistance, Mavi VPN fills a genuine gap in the VPN ecosystem.
                             </p>
                         </div>
@@ -406,38 +382,38 @@ QUIC DATAGRAM Frame:
                         <h3 className="wp-heading-3">Key Contributions</h3>
                         <div className="wp-grid-2">
                             <div className="wp-card">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <div>
                                     <CheckCircle size={16} className="text-accent" />
                                     <strong>Protocol Design</strong>
                                 </div>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
+                                <p>
                                     Strict separation of control (streams) and data (datagrams) within a single QUIC connection.
                                 </p>
                             </div>
                             <div className="wp-card">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <div>
                                     <CheckCircle size={16} className="text-accent" />
                                     <strong>MTU Black Hole Elimination</strong>
                                 </div>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
+                                <p>
                                     Pinned MTU provably eliminates PMTUD failures for all RFC-conformant networks.
                                 </p>
                             </div>
                             <div className="wp-card">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <div>
                                     <CheckCircle size={16} className="text-accent" />
                                     <strong>Active Probe Resistance</strong>
                                 </div>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
+                                <p>
                                     Standards-compliant HTTP/3 simulation makes the server behaviorally identical to Nginx.
                                 </p>
                             </div>
                             <div className="wp-card">
-                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+                                <div>
                                     <CheckCircle size={16} className="text-accent" />
                                     <strong>Memory-Safe Implementation</strong>
                                 </div>
-                                <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', margin: 0 }}>
+                                <p>
                                     End-to-end Rust eliminates buffer overflows, use-after-free, and race conditions.
                                 </p>
                             </div>
@@ -452,7 +428,7 @@ QUIC DATAGRAM Frame:
                         </ul>
 
                         <h3 className="wp-heading-3">References</h3>
-                        <ul className="wp-bullets" style={{ fontSize: '0.85rem' }}>
+                        <ul className="wp-bullets">
                             <li>RFC 9000 — QUIC Transport</li>
                             <li>RFC 9001 — Using TLS to Secure QUIC</li>
                             <li>RFC 9221 — Unreliable Datagram Extension</li>

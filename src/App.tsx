@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -10,15 +10,21 @@ import Whitepaper from './pages/Whitepaper';
 
 function App() {
   const { pathname, hash, key } = useLocation();
+  const previousPath = useRef<string | null>(null);
 
   useLayoutEffect(() => {
+    const isPageEntry = previousPath.current !== pathname;
+    previousPath.current = pathname;
     if (!hash) {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       return;
     }
     const target = document.getElementById(hash.slice(1));
     // Switching overview tabs should keep the reader at the same scroll position.
-    if (target?.getAttribute('role') === 'tabpanel') return;
+    if (target?.getAttribute('role') === 'tabpanel') {
+      if (isPageEntry) target.closest('section')?.scrollIntoView({ block: 'start', behavior: 'instant' });
+      return;
+    }
     if (target instanceof HTMLDetailsElement) target.open = true;
     target?.scrollIntoView({ block: 'start', behavior: 'instant' });
   }, [pathname, hash, key]);

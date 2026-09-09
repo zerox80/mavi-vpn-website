@@ -12,10 +12,10 @@ const crLevels = [
 
 export default function Technology() {
     return (
-        <div className="technology-page animate-fade-in">
+        <div className="technology-page">
             <div className="container technology-hero">
-                <p className="eyebrow">Inside Mavi / Technology</p>
-                <h1 className="hero-title">Privacy is in<br /><span className="text-accent">the details.</span></h1>
+                <p className="eyebrow">Technology</p>
+                <h1 className="hero-title">Inside the connection.</h1>
                 <p className="section-subtitle">
                     Explore the transport, encryption, and network engineering
                     behind a resilient connection.
@@ -39,8 +39,8 @@ export default function Technology() {
 
             <section className="container tech-section" id="censorship-resistance">
                 <p className="eyebrow">Censorship resistance</p>
-                <h2 className="section-title tech-section-header">Censorship Resistance Levels</h2>
-                <div className="cr-table-wrapper">
+                <h2 className="section-title tech-section-header">Layers of resistance</h2>
+                <div className="cr-table-wrapper" role="region" aria-label="Censorship resistance levels" tabIndex={0}>
                     <p className="cr-table-description">
                         Four progressive obfuscation layers that can be combined.
                         Each layer adds DPI resistance while maintaining full QUIC performance.
@@ -48,10 +48,10 @@ export default function Technology() {
                     <table className="cr-table">
                         <thead>
                             <tr>
-                                <th>Level</th>
-                                <th>Mode</th>
-                                <th>Wire Format</th>
-                                <th>Activate</th>
+                                <th scope="col">Level</th>
+                                <th scope="col">Mode</th>
+                                <th scope="col">Wire Format</th>
+                                <th scope="col">Activate</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -74,7 +74,7 @@ export default function Technology() {
 
             <section className="container tech-section" id="handshake">
                 <p className="eyebrow">0-RTT & masquerading</p>
-                <h2 className="section-title tech-section-header">QUIC 0-RTT & ALPN Masquerading</h2>
+                <h2 className="section-title tech-section-header">The QUIC handshake</h2>
                 <div className="tech-glass-grid">
                     <div>
                         <h3 className="tech-subtitle">Protocol Invisibility</h3>
@@ -134,7 +134,7 @@ export default function Technology() {
 
             <section className="container tech-section" id="datapath">
                 <p className="eyebrow">Datapath</p>
-                <h2 className="section-title tech-section-header">Zero-Copy Datapath in Rust</h2>
+                <h2 className="section-title tech-section-header">A direct path through Rust</h2>
                 <div className="tech-glass">
                     <p className="tech-text">
                         Packets arriving on the TUN interface are read directly into <code>bytes::BytesMut</code> buffers.
@@ -146,7 +146,7 @@ export default function Technology() {
                         <code>sendmsg()</code> syscall, reducing overhead by 8x. Combined with <strong>mimalloc</strong> and <strong>4 MB UDP buffers</strong>,
                         achieving ~890 Mbit/s on commodity hardware.
                     </p>
-                    <div className="tech-diagram-box" style={{ padding: '0.5rem' }}>
+                    <div className="tech-diagram-box">
                         <ZeroCopySvg />
                     </div>
                 </div>
@@ -154,7 +154,7 @@ export default function Technology() {
 
             <section className="container tech-section" id="roaming">
                 <p className="eyebrow">Roaming</p>
-                <h2 className="section-title tech-section-header">Seamless Roaming</h2>
+                <h2 className="section-title tech-section-header">Across networks</h2>
                 <div className="tech-glass">
                     <h3 className="tech-subtitle">QUIC Connection Migration</h3>
                     <p className="tech-text">
@@ -180,7 +180,7 @@ export default function Technology() {
 
             <section className="container tech-section" id="identity">
                 <p className="eyebrow">Access control</p>
-                <h2 className="section-title tech-section-header">Enterprise Access Control</h2>
+                <h2 className="section-title tech-section-header">Identity and access</h2>
                 <div className="tech-glass">
                     <h3 className="tech-subtitle">Keycloak OIDC Integration</h3>
                     <p className="tech-text">
