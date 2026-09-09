@@ -1,3 +1,4 @@
+import MobileDisclosure from './MobileDisclosure';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import type { KeyboardEvent } from 'react';
 import { ArrowRight, ArrowUpRight, Cpu, Fingerprint, Globe2, Layers, LockKeyhole, Monitor, Radio, ShieldCheck } from 'lucide-react';
@@ -48,6 +49,7 @@ export default function Overview() {
 
     return (
         <section className="overview" aria-labelledby="overview-title">
+            <MobileDisclosure title="Features & comparisons" revealHashes={tabs.map(tab => tab.id)}>
             <div className="panel-heading"><div><p className="eyebrow">02 / Under the surface</p><h2 id="overview-title">A closer look.</h2></div><p className="overview-intro">Explore the protocol, compare the numbers, and follow the packet path.</p></div>
             <div className="overview-tabs" role="tablist" aria-label="Explore Mavi VPN">
                 {tabs.map((tab, index) => (<Link key={tab.id} to={'/#' + tab.id} replace role="tab" id={'tab-' + tab.id} aria-controls={tab.id} aria-selected={activeTab === tab.id} tabIndex={activeTab === tab.id ? 0 : -1} onKeyDown={(event) => handleTabKeyDown(event, index)}>{tab.label}</Link>))}
@@ -89,6 +91,7 @@ export default function Overview() {
                 </div>
             </div>
             <div className="overview-footer"><span>QUIC transport · TLS 1.3 · Rust core</span><Link className="text-link" to="/technology">Explore the technology <ArrowUpRight size={14} aria-hidden="true" /></Link></div>
+            </MobileDisclosure>
         </section>
     );
 }

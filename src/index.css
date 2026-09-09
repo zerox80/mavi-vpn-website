@@ -399,3 +399,40 @@ details[open] > summary svg { transform: rotate(180deg); }
   .client-architecture, .packet-fields { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
   .client-architecture > div + div, .packet-fields > div + div { border: 0; padding-top: 0; }
 }
+.mobile-disclosure { min-width: 0; }
+.mobile-disclosure-heading { display: none; }
+@media (max-width: 767px) {
+  .hero { padding: 42px 0 28px; }
+  .hero .eyebrow { margin-bottom: 18px; }
+  .lede { margin-top: 20px; line-height: 1.7; }
+  .hero-actions { margin-top: 24px; gap: 14px 22px; }
+  .hero-footnote { margin-top: 24px; }
+  .hero-footnote span + span { display: none; }
+  .download-panel { padding: 28px 0; gap: 20px; }
+  .section-intro .eyebrow { margin-bottom: 10px; }
+  .section-intro h2 { margin-bottom: 12px; }
+  .platform-row { min-height: 76px; padding-block: 14px; }
+  .platform-row:first-child { min-height: 62px; }
+  .download-note { margin-top: 14px; }
+  .overview, .setup-section, .faq-section { display: block; padding: 0; }
+  .overview .panel-heading, .setup-section > .section-intro, .faq-header { display: none; }
+  .mobile-disclosure-heading { display: block; }
+  .mobile-disclosure-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 70px; gap: 18px; padding: 19px 0; border: 0; background: transparent; color: var(--fg); text-align: left; font-size: 1rem; letter-spacing: -.015em; font-weight: 500; }
+  .mobile-disclosure-toggle svg { color: var(--muted); }
+  .mobile-disclosure-toggle[aria-expanded='true'] svg { transform: rotate(180deg); }
+  .mobile-disclosure-content { padding: 0 0 24px; }
+  .mobile-disclosure-content[data-open='false'] { display: none; }
+  .overview .feature-top { display: none; }
+  .overview-footer { padding-top: 14px; margin-top: 20px; }
+  .overview-footer > span { display: none; }
+  .source-install .command-label { display: none; }
+  .footer { padding-block: 18px; }
+  .footer-main .brand { display: none; }
+  .footer-links { gap: 0 20px; }
+  .footer-bottom { margin-top: 12px; }
+}
+@media print {
+  .mobile-disclosure-heading { display: none; }
+  .mobile-disclosure-content[data-open='false'] { display: block; }
+  .overview .panel-heading, .setup-section > .section-intro, .faq-header { display: block; }
+}

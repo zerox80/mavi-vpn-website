@@ -1,3 +1,4 @@
+import MobileDisclosure from '../components/MobileDisclosure';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowDown, ArrowUpRight, Check, ChevronDown, Copy, Monitor, Smartphone, Terminal } from 'lucide-react';
@@ -27,7 +28,7 @@ export default function Home() {
             <section className="hero" aria-labelledby="headline">
                 <p className="eyebrow">Open source. Open internet.</p>
                 <h1 id="headline">A little more<br /><span className="text-accent">freedom online.</span></h1>
-                <p className="lede">An open-source VPN built for a fast, encrypted connection. Powered by Rust and QUIC. Yours to explore.</p>
+                <p className="lede">An open-source VPN for a fast, encrypted connection. Built with Rust and QUIC.</p>
                 <div className="hero-actions">
                     <Link className="button" to="/#downloads">Get Mavi VPN <ArrowDown size={16} aria-hidden="true" /></Link>
                     <a className="text-link" href="https://github.com/zerox80/mavi-vpn" target="_blank" rel="noopener noreferrer">View on GitHub <ArrowUpRight size={16} aria-hidden="true" /></a>
@@ -39,7 +40,7 @@ export default function Home() {
                 <div className="section-intro">
                     <p className="eyebrow">01 / Get connected</p>
                     <h2 id="download-title">Choose your platform.</h2>
-                    <p>Find the latest release and follow the setup instructions to make your first connection.</p>
+                    <p>The latest releases, directly from the source.</p>
                 </div>
                 <div className="download-options">
                     <div className="platform-list">
@@ -59,6 +60,7 @@ export default function Home() {
 
             <section className="setup-section" aria-labelledby="setup-title">
                 <div className="section-intro"><p className="eyebrow">03 / From the source</p><h2 id="setup-title">Make it your own.</h2><p>Build the Rust core, configure your server, and connect.</p></div>
+                <MobileDisclosure title="Build & setup" revealHashes={['docs']}>
                 <div className="setup-content">
                     <div className="source-install">
                         <p className="command-label">Start with the source</p>
@@ -81,6 +83,7 @@ export default function Home() {
                         </div>
                     </details>
                 </div>
+                </MobileDisclosure>
             </section>
             <FAQ />
         </div>

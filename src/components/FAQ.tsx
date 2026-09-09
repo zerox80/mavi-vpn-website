@@ -1,3 +1,4 @@
+import MobileDisclosure from './MobileDisclosure';
 import { ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -44,6 +45,7 @@ export default function FAQ() {
                 <p>A few details before you connect.</p>
                 <Link className="text-link" to="/whitepaper">Read the whitepaper →</Link>
             </div>
+            <MobileDisclosure title="Questions & answers" revealHashes={['faq']}>
             <div className="faq-container">
                 {faqs.map((faq) => (
                     <details className="faq-item" name="mavi-faq" key={faq.question}>
@@ -52,6 +54,7 @@ export default function FAQ() {
                     </details>
                 ))}
             </div>
+            </MobileDisclosure>
         </section>
     );
 }
